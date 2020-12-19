@@ -1,0 +1,96 @@
+import java.beans.Expression;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Vector;
+
+public abstract class Consumer {
+    Resume resume;
+    ArrayList<Consumer> aquaintance;
+
+    public Consumer(){
+        this.resume = null;
+        this.aquaintance = null;
+    }
+
+    public Consumer(Resume resume, ArrayList<Consumer> aquaintance){
+        this.resume = resume;
+        this.aquaintance = aquaintance;
+    }
+
+    public void setAquaintance(ArrayList<Consumer> aquaintance) {
+        this.aquaintance = aquaintance;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
+
+    public  void add(Education education){
+        this.resume.education.add(education);
+        Collections.sort(this.resume.education);
+    }
+
+    public void add(Experience experience){
+        this.resume.experience.add(experience);
+        Collections.sort(this.resume.experience);
+    }
+
+    public void add(Consumer consumer){
+        this.aquaintance.add(consumer);
+    }
+
+    public int getDegreeInFriendship(Consumer consumer){
+        /// ???
+        return 0;
+    }
+
+    public void remove(Consumer consumer){
+        this.aquaintance.remove(consumer);
+    }
+
+    public Integer getGraduationYear(){
+        // ???
+        return 0;
+    }
+
+    public Double meanGPA(){
+        double sum = 0;
+        int numberOf = 0;
+        for(Education e : this.resume.education){
+            sum = sum + e.finalAverage;
+            numberOf = numberOf + 1;
+        }
+        return (Double) sum / numberOf;
+    }
+
+    public class Resume{
+        public Information information;
+        public Vector<Education> education;  //?? collections
+        public Vector<Experience> experience; //???
+
+        public Resume(){
+            this.information = null;
+        }
+
+        public Resume(Information information, Vector<Experience> experience, Vector<Education> education){
+            this.information = information;
+            this.education = education;
+            this.experience = experience;
+        }
+
+        public void setEducation(Vector<Education> education) {
+            this.education = education;
+            Collections.sort(education);
+        }
+
+        public void setExperience(Vector<Experience> experience) {
+            this.experience = experience;
+            Collections.sort(experience);
+        }
+
+        public void setInformation(Information information) {
+            this.information = information;
+        }
+    }
+}
+
