@@ -1,5 +1,6 @@
 import java.beans.Expression;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Vector;
 
@@ -49,8 +50,13 @@ public abstract class Consumer {
     }
 
     public Integer getGraduationYear(){
-        // ???
-        return 0;
+        Calendar mostRecent = null;
+        for(Education e : this.resume.education){
+            if (mostRecent.compareTo(e.endDate) < 0){
+                mostRecent = e.endDate;
+            }
+        }
+        return mostRecent.YEAR;
     }
 
     public Double meanGPA(){

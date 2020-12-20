@@ -1,9 +1,10 @@
 import java.util.Collections;
+import java.util.Vector;
 
 public class Manager extends Employee{
-    Collections applications;
+    Vector<Recruiter.Request> requests;
     public void process(Job job) {
-
+        ///????
     }
 
 }

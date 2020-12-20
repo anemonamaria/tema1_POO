@@ -1,18 +1,18 @@
 public class Employee extends Consumer{
     private String companyName;
-    private int salary;
+    public double salary;
 
     public Employee(){
         this.companyName = "";
         this.salary = 0;
     }
 
-    public Employee(String name, int newSalary){
+    public Employee(String name, double newSalary){
         this.companyName = name;
         this.salary = newSalary;
     }
 
-    public void SetSalary(int newSalary){
+    public void SetSalary(double newSalary){
         this.salary = newSalary;
     }
 

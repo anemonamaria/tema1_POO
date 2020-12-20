@@ -6,11 +6,11 @@ public class Job {
     public String companyName;
     public Boolean available;
     private Constraint graduation;
-    private Constraint experience;
+    public Constraint experience;
     private Constraint academicAverage;
     private ArrayList applicants;
     private int numberOfEmployees;
-    private int salary;
+    public int salary;
 
     public Job(){
         this.jobName = "";
@@ -25,43 +25,44 @@ public class Job {
     }
 
     public void apply(User user){
-
+        ////????
     }
 
     public boolean meetsRequirments(User user){
 
         return false;
     }
-}
 
-class Constraint{
-    private int inferior;
-    private int superior;
-    private int x;
+    public class Constraint{
+        public int inferior;
+        public int superior;
+        public int x;
 
-    public Constraint(){
-        this.inferior = 0;
-        this.superior = 0;
-        this.x = 0;
-    }
-
-    public Constraint(int inferior, int superior, int x){
-        this.inferior = inferior;
-        this.superior = superior;
-        this.x = x;
-    }
-
-    public void setConstraints(int inferior, int superior) {
-        this.inferior = inferior;
-        this.superior = superior;
-    }
-
-    public boolean setX(int x){
-        if (this.inferior <= x && x <= this.superior){
-            this.x = x;
-            return true;
+        public Constraint(){
+            this.inferior = 0;
+            this.superior = 0;
+            this.x = 0;
         }
-        return false;
-    }
 
+        public Constraint(int inferior, int superior, int x){
+            this.inferior = inferior;
+            this.superior = superior;
+            this.x = x;
+        }
+
+        public void setConstraints(int inferior, int superior) {
+            this.inferior = inferior;
+            this.superior = superior;
+        }
+
+        public boolean setX(int x){
+            if (this.inferior <= x && x <= this.superior){
+                this.x = x;
+                return true;
+            }
+            return false;
+        }
+
+    }
 }
+
