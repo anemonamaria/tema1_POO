@@ -77,9 +77,23 @@ public class Company {
     }
 
     public Recruiter geRecruiter(User user){
-        ArrayList<Integer> recruiterScores;
-        //????????
-        Recruiter recruiter = new Recruiter();
+        ArrayList<Integer> recruiterScores = new ArrayList<>();
+        for (Recruiter r : recruiters){
+            recruiterScores.add(r.getDegreeInFriendship(user));
+        }
+        int max = 0, index = 0;
+        for(Integer i : recruiterScores){
+            if(i == 0){
+                // inseamna ca nu au nicio legatura
+                index = recruiterScores.indexOf(i);
+                break;
+            }
+            if (max < i){
+                max = i;
+                index = recruiterScores.indexOf(i);
+            }
+        }
+        Recruiter recruiter = recruiters.get(index);
         return recruiter;
     }
 

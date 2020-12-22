@@ -3,33 +3,35 @@ import java.util.ArrayList;
 
 public class Job {
     public String jobName;
-    public String companyName;
+    public Company company;
     public Boolean available;
     private Constraint graduation;
     public Constraint experience;
     private Constraint academicAverage;
-    private ArrayList applicants;
+    private ArrayList<User> applicants;
     private int numberOfEmployees;
     public int salary;
 
     public Job(){
         this.jobName = "";
-        this.companyName = "";
+        this.company = null;
         this.available = true;
     }
 
-    public Job(String jobName, String companyName, Boolean availabe){
+    public Job(String jobName, Company companyName, Boolean availabe){
         this.jobName = jobName;
-        this.companyName = companyName;
+        this.company = companyName;
         this.available = availabe;
     }
 
     public void apply(User user){
         ////????
+        Recruiter recruiter = this.company.geRecruiter(user);
+        int scor = recruiter.evaluate(this, user);
     }
 
     public boolean meetsRequirments(User user){
-
+        ///????
         return false;
     }
 

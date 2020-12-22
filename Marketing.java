@@ -4,7 +4,7 @@ public abstract class Marketing extends Department{
         for(Employee e : this.employees){
             if (e.salary > 5000) {
                 salaries = salaries +(Double) e.salary * 90 / 100;
-            } else  ///??? si aia cu 3000?
+            } else  ///??? si aia cu 4000?
                 salaries = salaries + e.salary;
             //salaries = salaries + (Double)e.salary;
         }

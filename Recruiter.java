@@ -6,8 +6,10 @@ public class Recruiter extends Employee {
     }
 
     public int evaluate(Job job, User user) {
-            ///?????
-        return 0;
+        // specifica metoda in testare
+        double evaluation = this.rating * user.getTotalScore();
+        this.used();
+        return (int) evaluation;
     }
 
     public class Request<K, V> {

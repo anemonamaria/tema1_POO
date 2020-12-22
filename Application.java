@@ -46,7 +46,7 @@ public class Application {
         ArrayList<Job> availableJobs = new ArrayList<>();
         for (String c : companies){
             for (Job j : this.jobs){
-                if (j.companyName.equals(c) && j.available){
+                if (j.company.name.equals(c) && j.available){
                     availableJobs.add(j);
                 }
             }

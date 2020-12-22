@@ -41,8 +41,18 @@ public abstract class Consumer {
     }
 
     public int getDegreeInFriendship(Consumer consumer){
-        /// ???
-        return 0;
+        int contoar = 0;
+        for(Consumer c : this.aquaintance){
+            if(!c.equals(consumer)){
+                contoar = contoar + 1;
+
+            } else {
+                contoar = contoar + 1;
+                break;
+            }
+        }
+        if (contoar == this.aquaintance.size()) return  0;
+        return contoar;
     }
 
     public void remove(Consumer consumer){
@@ -69,7 +79,7 @@ public abstract class Consumer {
         return (Double) sum / numberOf;
     }
 
-    public class Resume{
+    public static class Resume{
         public Information information;
         public Vector<Education> education;  //?? collections
         public Vector<Experience> experience; //???
