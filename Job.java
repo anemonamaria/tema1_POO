@@ -13,7 +13,7 @@ public class Job {
     public int salary;
 
     public Job(){
-        this.jobName = "";
+        this.jobName = ""; 
         this.company = null;
         this.available = true;
     }
@@ -22,6 +22,42 @@ public class Job {
         this.jobName = jobName;
         this.company = companyName;
         this.available = availabe;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public void setNumberOfEmployees(int numberOfEmployees) {
+        this.numberOfEmployees = numberOfEmployees;
+    }
+
+    public void setAcademicAverage(Constraint academicAverage) {
+        this.academicAverage = academicAverage;
+    }
+
+    public void setApplicants(ArrayList<User> applicants) {
+        this.applicants = applicants;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public void setExperience(Constraint experience) {
+        this.experience = experience;
+    }
+
+    public void setGraduation(Constraint graduation) {
+        this.graduation = graduation;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 
     public void apply(User user){

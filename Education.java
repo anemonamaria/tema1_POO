@@ -11,27 +11,27 @@ public class Education implements Comparable {
         this.institution = "";
     }
 
-    public Education(String institution) throws InvalidDatesException{
+    public Education(String institution) {//throws InvalidDatesException
         this.institution = institution;
     }
 
-    public void setStartDate(Calendar startDate) throws InvalidDatesException{
+    public void setStartDate(Calendar startDate) {//throws InvalidDatesException
         this.startDate = startDate;
     }
 
-    public void setFinalAverage(Double finalAverage) throws InvalidDatesException{
+    public void setFinalAverage(Double finalAverage) {//throws InvalidDatesException
         this.finalAverage = finalAverage;
     }
 
-    public void setInstitution(String institution) throws InvalidDatesException{
+    public void setInstitution(String institution) {//throws InvalidDatesException
         this.institution = institution;
     }
 
-    public void setEndDate(Calendar endDate) throws InvalidDatesException{
+    public void setEndDate(Calendar endDate) {//throws InvalidDatesException
         this.endDate = endDate;
     }
 
-    public void setLevel(String level) throws InvalidDatesException{
+    public void setLevel(String level) {//throws InvalidDatesException
         this.level = level;
     }
 
@@ -55,8 +55,8 @@ public class Education implements Comparable {
         }
         return 0;
     }
-
+/*
     static class InvalidDatesException extends Exception{
         /// ???
-    }
+    }*/
 }

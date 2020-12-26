@@ -86,6 +86,8 @@ public abstract class Consumer {
 
         public Resume(){
             this.information = null;
+            this.experience = null;
+            this.education = null;
         }
 
         public Resume(Information information, Vector<Experience> experience, Vector<Education> education){

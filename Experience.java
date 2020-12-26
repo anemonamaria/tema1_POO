@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import java.util.*;
+import java.io.*;
 
 public class Experience implements Comparable{
     public Calendar startDate;
@@ -15,7 +16,7 @@ public class Experience implements Comparable{
         this.positon = positon;
     }
 
-    public void setEndDate(Calendar endDate) throws InvalidDatesException{ //??
+    public void setEndDate(Calendar endDate) { //throws Exception??
         /// ???
         this.endDate = endDate;
     }
@@ -28,7 +29,7 @@ public class Experience implements Comparable{
         this.positon = positon;
     }
 
-    public void setStartDate(Calendar startDate) throws InvalidDatesException{  //???
+    public void setStartDate(Calendar startDate) {  //throws Exception???
         this.startDate = startDate;
     }
 
@@ -48,7 +49,7 @@ public class Experience implements Comparable{
         return 0;
     }
 
-    static class InvalidDatesException extends Exception{
+   // static class InvalidDatesException extends Exception{
         /// ???
-    }
+    //}
 }
