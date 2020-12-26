@@ -8,10 +8,10 @@ public class User extends Consumer{
     public Double getTotalScore(){
         Double score = (double)0; ///????
         Integer yearsOfExperience = 0;
-        if (this.resume.experience.firstElement().startDate.getWeekYear()/52 == this.resume.experience.lastElement().endDate.getWeekYear()/52){
+        if (this.resume.experience.firstElement().startDate.getYear() == this.resume.experience.lastElement().endDate.getYear()){
             yearsOfExperience = 1;
         } else {
-            yearsOfExperience = this.resume.experience.lastElement().endDate.getWeekYear()/52 - this.resume.experience.firstElement().startDate.getWeekYear()/52;
+            yearsOfExperience = this.resume.experience.lastElement().endDate.getYear() - this.resume.experience.firstElement().startDate.getYear();
         }
         score = yearsOfExperience * 1.5 + this.meanGPA();
         return score;

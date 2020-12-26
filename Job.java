@@ -5,7 +5,7 @@ public class Job {
     public String jobName;
     public Company company;
     public Boolean available;
-    private Constraint graduation;
+    private Constraint graduationYear;
     public Constraint experience;
     private Constraint academicAverage;
     private ArrayList<User> applicants;
@@ -13,7 +13,7 @@ public class Job {
     public int salary;
 
     public Job(){
-        this.jobName = ""; 
+        this.jobName = "";
         this.company = null;
         this.available = true;
     }
@@ -53,7 +53,7 @@ public class Job {
     }
 
     public void setGraduation(Constraint graduation) {
-        this.graduation = graduation;
+        this.graduationYear = graduation;
     }
 
     public void setJobName(String jobName) {
@@ -67,25 +67,32 @@ public class Job {
     }
 
     public boolean meetsRequirments(User user){
-        ///????
-        return false;
+        int aux = 1;
+        if (!this.academicAverage.verifyX(user.meanGPA().intValue())){
+            aux = 0;
+        }
+        if(!this.experience.verifyX(user.getTotalYearsExperience())){
+            aux = 0;
+        }
+        if(!this.graduationYear.verifyX(user.resume.education.lastElement().endDate.getYear())){ ///????
+            aux = 0;
+        }
+        if(aux == 1) return true;
+        else return false;
     }
 
-    public class Constraint{
+    public static class Constraint{
         public int inferior;
         public int superior;
-        public int x;
 
         public Constraint(){
             this.inferior = 0;
             this.superior = 0;
-            this.x = 0;
         }
 
-        public Constraint(int inferior, int superior, int x){
+        public Constraint(int inferior, int superior){
             this.inferior = inferior;
             this.superior = superior;
-            this.x = x;
         }
 
         public void setConstraints(int inferior, int superior) {
@@ -93,14 +100,12 @@ public class Job {
             this.superior = superior;
         }
 
-        public boolean setX(int x){
+        public boolean verifyX(int x){
             if (this.inferior <= x && x <= this.superior){
-                this.x = x;
                 return true;
             }
             return false;
         }
-
     }
 }
 

@@ -1,6 +1,5 @@
 import java.beans.Expression;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Vector;
 
@@ -66,7 +65,7 @@ public abstract class Consumer {
                 mostRecent = e.endDate;
             }
         }
-        return mostRecent.YEAR;
+        return mostRecent.getYear();
     }
 
     public Double meanGPA(){
@@ -77,6 +76,16 @@ public abstract class Consumer {
             numberOf = numberOf + 1;
         }
         return (Double) sum / numberOf;
+    }
+
+    public int getTotalYearsExperience(){
+        Integer yearsOfExperience = 0;
+        if (this.resume.experience.firstElement().startDate.getYear() == this.resume.experience.lastElement().endDate.getYear()){
+            yearsOfExperience = 1;
+        } else {
+            yearsOfExperience = this.resume.experience.lastElement().endDate.getYear() - this.resume.experience.firstElement().startDate.getYear();
+        }
+        return yearsOfExperience;
     }
 
     public static class Resume{
