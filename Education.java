@@ -1,11 +1,11 @@
 import java.util.*;
 
 public class Education implements Comparable {
-    public Calendar startDate;
-    public Calendar endDate;
-    public String institution;
-    public String level;
-    public Double finalAverage;
+    private Calendar startDate;
+    private Calendar endDate;
+    private String institution;
+    private String level;
+    private Double finalAverage;
 
     public Education(){
         this.institution = "";
@@ -15,8 +15,11 @@ public class Education implements Comparable {
         this.institution = institution;
     }
 
-    public void setStartDate(Calendar startDate) {//throws InvalidDatesException
-        this.startDate = startDate;
+    public void setStartDate(Calendar startDate) throws InvalidDatesException{
+        // verificam daca data de inceput corespunde
+        if (startDate.compareTo(this.endDate) < 0){  // NEVERIFICATA
+            this.startDate = startDate;
+        } else throw  new InvalidDatesException();
     }
 
     public void setFinalAverage(Double finalAverage) {//throws InvalidDatesException
@@ -27,12 +30,27 @@ public class Education implements Comparable {
         this.institution = institution;
     }
 
-    public void setEndDate(Calendar endDate) {//throws InvalidDatesException
-        this.endDate = endDate;
+    public void setEndDate(Calendar endDate) throws InvalidDatesException{
+        // verificam daca data de final corespunde
+        if (endDate.compareTo(this.startDate) > 0){   /// NEVERIFICATA
+            this.endDate = endDate;
+        } else throw new InvalidDatesException();
     }
 
     public void setLevel(String level) {//throws InvalidDatesException
         this.level = level;
+    }
+
+    public Calendar getEndDate() {
+        return endDate;
+    }
+
+    public Calendar getStartDate() {
+        return startDate;
+    }
+
+    public Double getFinalAverage() {
+        return finalAverage;
     }
 
     @Override
@@ -55,8 +73,9 @@ public class Education implements Comparable {
         }
         return 0;
     }
-/*
-    static class InvalidDatesException extends Exception{
-        /// ???
-    }*/
+    static class InvalidDatesException extends Exception {
+        public InvalidDatesException() {
+            System.out.println("Invalid dates! Please enter another dates.");
+        }
+    }
 }

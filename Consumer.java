@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.Vector;
 
 public abstract class Consumer {
-    Resume resume;
-    ArrayList<Consumer> aquaintance;
+    private Resume resume;
+    private ArrayList<Consumer> aquaintance;
 
     public Consumer(){
         this.resume = null;
@@ -25,21 +25,36 @@ public abstract class Consumer {
         this.resume = resume;
     }
 
+    public Resume getResume() {
+        return resume;
+    }
+
+    public ArrayList<Consumer> getAquaintance() {
+        return aquaintance;
+    }
+
+    // Adăugarea unor studii;
     public  void add(Education education){
         this.resume.education.add(education);
         Collections.sort(this.resume.education);
     }
 
+    // Adăugarea unei experient,e profesionale;
     public void add(Experience experience){
         this.resume.experience.add(experience);
         Collections.sort(this.resume.experience);
     }
 
+    // Adăugarea unui nou cunoscut;
     public void add(Consumer consumer){
         this.aquaintance.add(consumer);
     }
 
+    //Determinarea gradului de prietenie cu un alt utilizator – se realizează o parcurgere în lăt, ime în ret,eaua
+    //socială a utilizatorului;
     public int getDegreeInFriendship(Consumer consumer){
+        /// DE MODIFICAT !!!! DE ADAUGAT GRAFURI
+
         int contoar = 0;
         for(Consumer c : this.aquaintance){
             if(!c.equals(consumer)){
@@ -54,44 +69,48 @@ public abstract class Consumer {
         return contoar;
     }
 
+    //Eliminarea unei persoane din ret,eaua socială
     public void remove(Consumer consumer){
         this.aquaintance.remove(consumer);
     }
 
+    // Determinarea anului absolvirii
     public Integer getGraduationYear(){
         Calendar mostRecent = null;
         for(Education e : this.resume.education){
-            if (mostRecent.compareTo(e.endDate) < 0){
-                mostRecent = e.endDate;
+            if (mostRecent.compareTo(e.getEndDate()) < 0){
+                mostRecent = e.getEndDate();
             }
         }
         return mostRecent.getYear();
     }
 
+    //  Determinarea mediei studiilor absolvite;
     public Double meanGPA(){
         double sum = 0;
         int numberOf = 0;
         for(Education e : this.resume.education){
-            sum = sum + e.finalAverage;
+            sum = sum + e.getFinalAverage();
             numberOf = numberOf + 1;
         }
         return (Double) sum / numberOf;
     }
 
+    //metoda pentru aflarea anilor de experienta
     public int getTotalYearsExperience(){
         Integer yearsOfExperience = 0;
-        if (this.resume.experience.firstElement().startDate.getYear() == this.resume.experience.lastElement().endDate.getYear()){
+        if (this.resume.experience.firstElement().getStartDate().getYear() == this.resume.experience.lastElement().getEndDate().getYear()){
             yearsOfExperience = 1;
         } else {
-            yearsOfExperience = this.resume.experience.lastElement().endDate.getYear() - this.resume.experience.firstElement().startDate.getYear();
+            yearsOfExperience = this.resume.experience.lastElement().getEndDate().getYear() - this.resume.experience.firstElement().getStartDate().getYear();
         }
         return yearsOfExperience;
     }
 
     public static class Resume{
-        public Information information;
-        public Vector<Education> education;  //?? collections
-        public Vector<Experience> experience; //???
+        private Information information;
+        private Vector<Education> education;
+        private Vector<Experience> experience;
 
         public Resume(){
             this.information = null;
@@ -117,6 +136,18 @@ public abstract class Consumer {
 
         public void setInformation(Information information) {
             this.information = information;
+        }
+
+        public Information getInformation() {
+            return information;
+        }
+
+        public Vector<Education> getEducation() {
+            return education;
+        }
+
+        public Vector<Experience> getExperience() {
+            return experience;
         }
     }
 }

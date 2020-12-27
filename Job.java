@@ -2,15 +2,15 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Job {
-    public String jobName;
-    public Company company;
-    public Boolean available;
+    private String jobName;
+    private Company company;
+    private Boolean available;
     private Constraint graduationYear;
-    public Constraint experience;
+    private Constraint experience;
     private Constraint academicAverage;
     private ArrayList<User> applicants;
     private int numberOfEmployees;
-    public int salary;
+    private int salary;
 
     public Job(){
         this.jobName = "";
@@ -22,6 +22,22 @@ public class Job {
         this.jobName = jobName;
         this.company = companyName;
         this.available = availabe;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public int getNumberOfEmployees() {
+        return numberOfEmployees;
+    }
+
+    public Constraint getExperience() {
+        return experience;
     }
 
     public void setCompany(Company company) {
@@ -60,12 +76,16 @@ public class Job {
         this.jobName = jobName;
     }
 
+    // O metodă prin care un utilizator aplică la un job în companie
     public void apply(User user){
-        ////????
-        Recruiter recruiter = this.company.geRecruiter(user);
+        Recruiter recruiter = this.company.geRecruiter(user);   /// DE MODFICAT FUNCTIA ASTA PT GRAF, TREBUIE MUTATA IN CLASA ASTA
         int scor = recruiter.evaluate(this, user);
+        Recruiter.Request<Job, Consumer> newRequest = new Recruiter.Request<Job, Consumer>(this, user, recruiter, (double)scor);
+        Manager.requests.add(newRequest);
     }
 
+    // O metodă care iterează prin lista de constrângeri s, i verifică dacă sunt îndeplinite pentru aplicantul primit
+    //ca parametru
     public boolean meetsRequirments(User user){
         int aux = 1;
         if (!this.academicAverage.verifyX(user.meanGPA().intValue())){
@@ -74,7 +94,7 @@ public class Job {
         if(!this.experience.verifyX(user.getTotalYearsExperience())){
             aux = 0;
         }
-        if(!this.graduationYear.verifyX(user.resume.education.lastElement().endDate.getYear())){ ///????
+        if(!this.graduationYear.verifyX(user.getResume().getEducation().lastElement().getEndDate().getYear())){ ///????
             aux = 0;
         }
         if(aux == 1) return true;
@@ -82,6 +102,7 @@ public class Job {
     }
 
     public static class Constraint{
+        // clasa pentru definirea constrangerilor
         public int inferior;
         public int superior;
 
@@ -100,6 +121,7 @@ public class Job {
             this.superior = superior;
         }
 
+        // verificam daca o valoare se incadreaza in constrangerile clasei
         public boolean verifyX(int x){
             if (this.inferior <= x && x <= this.superior){
                 return true;

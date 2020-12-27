@@ -1,12 +1,10 @@
 import java.lang.Object;
 import java.util.*;
 
-
-// facuta, neverificata
 public class Application {
-    public ArrayList<Company> companies;
-    public ArrayList<User> users;
-    public ArrayList<Job> jobs;
+    private ArrayList<Company> companies;
+    public static ArrayList<User> users;
+    private ArrayList<Job> jobs;
 
     public ArrayList<Company> getCompanies() {
         return companies;
@@ -46,7 +44,7 @@ public class Application {
         ArrayList<Job> availableJobs = new ArrayList<>();
         for (String c : companies){
             for (Job j : this.jobs){
-                if (j.company.name.equals(c) && j.available){
+                if (j.getCompany().getName().equals(c) && j.getAvailable()){
                     availableJobs.add(j);
                 }
             }

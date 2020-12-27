@@ -2,9 +2,11 @@ public class Recruiter extends Employee {
     private double rating = 5;
 
     public void used() {
+        // metoda pentru a actualiza constant rating-ul
         this.rating = this.rating + 0.1;
     }
 
+    // un recruiter evalueaza un user in functie de rating-ul sau si de scorul total al user-ului
     public int evaluate(Job job, User user) {
         // specifica metoda in testare
         double evaluation = this.rating * user.getTotalScore();
@@ -12,7 +14,7 @@ public class Recruiter extends Employee {
         return (int) evaluation;
     }
 
-    public class Request<K, V> {
+    public static class Request<K, V> {
         private K key;
         private V value1, value2;
         private Double score;

@@ -5,5 +5,6 @@ public abstract class Management extends Department{
             salaries = salaries + (Double)e.salary;
         }
         return (double)salaries * 84 / 100;
+        //impozit 16% pentru toata lumea
     }
 }

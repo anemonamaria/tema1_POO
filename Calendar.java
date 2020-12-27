@@ -1,7 +1,8 @@
 public class Calendar {
-    public int year;
-    public int month;
-    public int day;
+    //clasa pentru reprezentarea unei dati
+    private int year;
+    private int month;
+    private int day;
 
     public Calendar(){
         this.year = this.day = this.month = 0;
