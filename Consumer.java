@@ -112,30 +112,11 @@ public abstract class Consumer {
         private Vector<Education> education;
         private Vector<Experience> experience;
 
-        public Resume(){
-            this.information = null;
-            this.experience = null;
-            this.education = null;
-        }
-
-        public Resume(Information information, Vector<Experience> experience, Vector<Education> education){
-            this.information = information;
-            this.education = education;
-            this.experience = experience;
-        }
-
-        public void setEducation(Vector<Education> education) {
-            this.education = education;
-            Collections.sort(education);
-        }
-
-        public void setExperience(Vector<Experience> experience) {
-            this.experience = experience;
-            Collections.sort(experience);
-        }
-
-        public void setInformation(Information information) {
-            this.information = information;
+        // Builder pattern
+        public Resume(ResumeBuilder resumeBuilder) {
+            this.information = resumeBuilder.information;
+            this.education = resumeBuilder.education;
+            this.experience = resumeBuilder.experience;
         }
 
         public Information getInformation() {
@@ -148,6 +129,26 @@ public abstract class Consumer {
 
         public Vector<Experience> getExperience() {
             return experience;
+        }
+
+        // Builder pattern
+        public static class ResumeBuilder{
+            private Information information;
+            private Vector<Education> education;
+            private Vector<Experience> experience;
+
+            public ResumeBuilder(Information information){
+                this.information = information;
+            }
+
+            public ResumeBuilder(Vector<Education> education, Vector<Experience> experience){
+                this.education = education;
+                this.experience = experience;
+            }
+
+            public Resume build(){
+                return new Resume(this);
+            }
         }
     }
 }

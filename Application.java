@@ -6,6 +6,20 @@ public class Application {
     public static ArrayList<User> users;
     private ArrayList<Job> jobs;
 
+    // Singleton pattern
+    private static Application instance;
+
+    //constructor privat doar pentru a nu permine instantierea
+    private Application() {
+        this.companies = null;
+    }
+
+    public static Application getInstance() {
+        if(instance == null) {
+            instance = new Application();
+        }
+        return instance;
+    }
     public ArrayList<Company> getCompanies() {
         return companies;
     }

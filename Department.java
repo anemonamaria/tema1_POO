@@ -45,4 +45,43 @@ public abstract class Department {
     public void setJobs(ArrayList<Job> jobs) {
         this.jobs = jobs;
     }
+
+    // Factory pattern ?????? E BINE?????
+    static class DepartmentFactory {
+        public static Department Factory(String departmentName){
+            if (departmentName.equals("Marketing")){
+                return new Marketing() {
+                    @Override
+                    public double getTotalSalaryBudget() {
+                        return super.getTotalSalaryBudget();
+                    }
+                };
+            }
+            if (departmentName.equals("Finance")){
+                return new Finance() {
+                    @Override
+                    public double getTotalSalaryBudget() {
+                        return super.getTotalSalaryBudget();
+                    }
+                };
+            }
+            if (departmentName.equals("IT")){
+                return new IT() {
+                    @Override
+                    public double getTotalSalaryBudget() {
+                        return super.getTotalSalaryBudget();
+                    }
+                };
+            }
+            if (departmentName.equals("Management")){
+                return new Management() {
+                    @Override
+                    public double getTotalSalaryBudget() {
+                        return super.getTotalSalaryBudget();
+                    }
+                };
+            }
+            return null;
+        }
+    }
 }
