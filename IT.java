@@ -4,7 +4,7 @@ public abstract class IT extends Department{
         for(Employee e : this.employees){
             salaries = salaries + (Double)e.salary;
         }
-        return salaries;
+        return salaries;  // fara taxe
     }
-    // no taxes
+
 }

@@ -69,7 +69,7 @@ public abstract class Consumer {
         return contoar;
     }
 
-    //Eliminarea unei persoane din ret,eaua socială
+    //Eliminarea unei persoane din reteaua socială
     public void remove(Consumer consumer){
         this.aquaintance.remove(consumer);
     }

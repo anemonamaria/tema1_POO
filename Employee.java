@@ -1,5 +1,5 @@
 public class Employee extends Consumer{
-    private String companyName;
+    public String companyName;
     public double salary;
 
     public Employee(){

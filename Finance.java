@@ -3,10 +3,11 @@ public abstract class Finance extends Department{
         Double salaries = (double)0;
         for(Employee e : this.employees){
             if( e.getTotalYearsExperience() < 1) {
-                ///??? de modificat in calendar sau ceva
                 salaries = salaries + (double)e.salary * 90 / 100;
+                // 10% pentru cei cu mai putin de 1 an experienta
             } else
                 salaries = salaries + (double)e.salary * 84 / 100;
+                // 16% pentru toti ceilalti
         }
         return salaries;
     }

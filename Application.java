@@ -2,7 +2,7 @@ import java.lang.Object;
 import java.util.*;
 
 public class Application {
-    private ArrayList<Company> companies;
+    public static ArrayList<Company> companies;
     public static ArrayList<User> users;
     private ArrayList<Job> jobs;
 

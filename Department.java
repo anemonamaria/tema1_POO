@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Department {
-    public ArrayList<Employee> employees;
+    public static ArrayList<Employee> employees;
     public ArrayList<Job> jobs;
 
     // Metodă abstractă care va returna bugetul total de salarii, după aplicarea taxelor;
@@ -23,7 +23,7 @@ public abstract class Department {
         this.employees.add(employee);
     }
 
-    // Metodă care s, terge un angajat din departament;
+    // Metodă care sterge un angajat din departament;
     public void remove(Employee employee){
         this.employees.remove(employee);
     }
@@ -31,6 +31,11 @@ public abstract class Department {
     // Metodă care adaugă un job în departament;
     public void add(Job job){
         this.jobs.add(job);
+        for(User u : Company.observers){
+            // Observer pattern - job nou
+            /// E BINE????
+            u.update(new Notification("New job!"));
+        }
     }
 
     // Metodă care întoarce angajat, ii dintr-un departament;

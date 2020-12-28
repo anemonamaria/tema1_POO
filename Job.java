@@ -40,6 +40,10 @@ public class Job {
         return experience;
     }
 
+    public int getSalary() {
+        return salary;
+    }
+
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -62,6 +66,11 @@ public class Job {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+
+        // Observer pattern
+        if (this.available == false){
+            this.company.notifyAllObservers(); ///??
+        }
     }
 
     public void setExperience(Constraint experience) {
@@ -82,6 +91,11 @@ public class Job {
         int scor = recruiter.evaluate(this, user);
         Recruiter.Request<Job, Consumer> newRequest = new Recruiter.Request<Job, Consumer>(this, user, recruiter, (double)scor);
         Manager.requests.add(newRequest);
+
+        // Observer pattern
+        this.company.addObserver(user);
+        //Un utilizator este adăugat drept observator pentru o companie în momentul în care acesta aplică la
+        //un job din compania respectivă.
     }
 
     // O metodă care iterează prin lista de constrângeri s, i verifică dacă sunt îndeplinite pentru aplicantul primit

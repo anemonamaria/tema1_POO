@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
-public class Company {
+public class Company implements Subject{
     private String name;
     private Manager manager;
     private ArrayList<Department> departments;
     private ArrayList<Recruiter> recruiters;
+    public static ArrayList<User> observers;
 
     public Company(){
         this.name = "";
@@ -14,6 +15,9 @@ public class Company {
         this.name = newName;
     }
 
+    public ArrayList<User> getObservers() {
+        return observers;
+    }
 
     public void setManager(Manager manager) {
         this.manager = manager;
@@ -144,5 +148,28 @@ public class Company {
             }
         }
         return availableJobs;
+    }
+
+    @Override
+    public void addObserver(User user) {
+        this.observers.add(user);
+    }
+
+    @Override
+    public void removeObserver(User c) {
+        this.observers.remove(c);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for(User o : observers){
+            o.update(new Notification("Notification"));   ///????
+        }
+    }
+
+    public void notifyAllObservers(Notification notification){
+        for(User o : observers){
+            o.update(notification);   ///????
+        }
     }
 }

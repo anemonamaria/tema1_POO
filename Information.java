@@ -49,8 +49,8 @@ public class Information {
 }
 
 class Language{
-    public String name;
-    public String level;
+    private String name;
+    private String level;
 
     public Language(){
         this.name = "";

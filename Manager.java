@@ -21,6 +21,8 @@ public class Manager extends Employee{
                 possibleApplicants.add(r);
                 /// fac o lista cu toti utilizatorii care intrunesc conditii
             }
+            else ((User) user).update(new Notification("You were rejected!"));
+            // Observer pattern - utilizatori respinsi
         }
         ArrayList<Recruiter.Request<Job, Consumer>> sortedList = new ArrayList<>();
         double max = 0;
@@ -44,6 +46,24 @@ public class Manager extends Employee{
             possibleApplicants.remove(aux);
             // il sterg din lista pentru a putea gasi urmatorul utilizator cu cel mai mare scor
         }
+        ArrayList<Recruiter.Request<Job, Consumer>> rejected = new ArrayList<>();
+        for(Recruiter.Request<Job, Consumer> req : possibleApplicants){
+            ((User)req.getValue1()).update(new Notification("You were rejected!"));
+            // Observer pattern - utilizatori respinsi
+        }
+        for(Recruiter.Request<Job, Consumer> r : sortedList){
+            User newUser = (User)r.getValue1();
+            Employee newEmployee = newUser.convert();
+            newEmployee.companyName = job.getCompany().getName();
+            newEmployee.salary = job.getSalary();
+            // se angajeaza
+            Department.employees.add(newEmployee);
+            for(Company c : Application.companies){
+                c.removeObserver(newUser);
+                // Observer pattern - sterg din lista tuturor companiilor observatorul angajat
+                // E BINE????
+            }
+        }
         for (Recruiter.Request<Job, Consumer> req : requests){
             if (req.getKey() == job){
                 requests.remove(req);
@@ -51,6 +71,11 @@ public class Manager extends Employee{
             }
         }
         job.setAvailable(false);
+        Company company = job.getCompany();
+        company.notifyAllObservers(new Notification("Closed job!")); // ???
+        // Observer pattern - job inchis
         // inchidem job-ul dupa ce trecem prin toate request-urile
+
+
     }
 }
