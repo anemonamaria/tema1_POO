@@ -19,7 +19,7 @@ public class Education implements Comparable {
         // verificam daca data de inceput corespunde
         if (startDate.compareTo(this.endDate) < 0){  // NEVERIFICATA
             this.startDate = startDate;
-        } else throw  new InvalidDatesException();
+        }
     }
 
     public void setFinalAverage(Double finalAverage) {//throws InvalidDatesException
@@ -34,7 +34,7 @@ public class Education implements Comparable {
         // verificam daca data de final corespunde
         if (endDate.compareTo(this.startDate) > 0){   /// NEVERIFICATA
             this.endDate = endDate;
-        } else throw new InvalidDatesException();
+        }
     }
 
     public void setLevel(String level) {//throws InvalidDatesException

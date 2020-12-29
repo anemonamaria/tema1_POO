@@ -32,9 +32,9 @@ public class Experience implements Comparable{
 
     public void setStartDate(Calendar startDate) throws InvalidDatesException{
         // verificam daca data de inceput corespunde
-        if (startDate.compareTo(this.endDate) < 0){  // NEVERIFICATA
-            this.startDate = startDate;
-        } else throw  new InvalidDatesException();
+       if (startDate.compareTo(this.endDate) < 0){  // NEVERIFICATA
+           this.startDate = startDate;
+       }
     }
 
     public Calendar getStartDate() {

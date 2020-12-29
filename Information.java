@@ -46,6 +46,10 @@ public class Information {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    public void addKnownLanguages(Language language){
+        this.knownLanguages.add(language);
+    }
 }
 
 class Language{

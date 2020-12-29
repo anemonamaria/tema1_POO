@@ -141,9 +141,10 @@ public abstract class Consumer {
                 this.information = information;
             }
 
-            public ResumeBuilder(Vector<Education> education, Vector<Experience> experience){
+            public ResumeBuilder vectors(Vector<Education> education, Vector<Experience> experience){
                 this.education = education;
                 this.experience = experience;
+                return this;
             }
 
             public Resume build(){
