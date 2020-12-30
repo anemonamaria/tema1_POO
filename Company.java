@@ -97,6 +97,14 @@ public class Company implements Subject{
         return this.departments.contains(department);
     }
 
+    public Department getDepartment(String departmentName){
+        for(Department d : departments){
+            if(d.getName() == departmentName){
+                return d;
+            }
+        }
+        return null;
+    }
     // Verificare existent,ei unui angajat în companie;
     public boolean contains(Employee employee){
         for(Department d : this.departments){

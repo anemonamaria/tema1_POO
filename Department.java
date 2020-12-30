@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public abstract class Department {
     public static ArrayList<Employee> employees;
     public ArrayList<Job> jobs;
+    private String name;
 
     // Metodă abstractă care va returna bugetul total de salarii, după aplicarea taxelor;
     public abstract double getTotalSalaryBudget(); //??
@@ -49,6 +50,14 @@ public abstract class Department {
 
     public void setJobs(ArrayList<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     // Factory pattern ?????? E BINE?????

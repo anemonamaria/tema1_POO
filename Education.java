@@ -17,9 +17,7 @@ public class Education implements Comparable {
 
     public void setStartDate(Calendar startDate) throws InvalidDatesException{
         // verificam daca data de inceput corespunde
-        if (startDate.compareTo(this.endDate) < 0){  // NEVERIFICATA
             this.startDate = startDate;
-        }
     }
 
     public void setFinalAverage(Double finalAverage) {//throws InvalidDatesException
@@ -32,7 +30,7 @@ public class Education implements Comparable {
 
     public void setEndDate(Calendar endDate) throws InvalidDatesException{
         // verificam daca data de final corespunde
-        if (endDate.compareTo(this.startDate) > 0){   /// NEVERIFICATA
+        if (endDate == null || endDate.compareTo(this.startDate) > 0){   /// NEVERIFICATA
             this.endDate = endDate;
         }
     }

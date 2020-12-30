@@ -6,6 +6,7 @@ public class Experience implements Comparable{
     private Calendar endDate;
     private String positon;
     private Company company;
+    private String department;
 
     public Experience(){
         this.positon = "";
@@ -17,7 +18,7 @@ public class Experience implements Comparable{
 
     public void setEndDate(Calendar endDate) throws InvalidDatesException{
         // verificam daca data de final corespunde
-        if (endDate.compareTo(this.startDate) > 0){   /// NEVERIFICATA
+        if (endDate == null || endDate.compareTo(this.startDate) > 0 ){   /// NEVERIFICATA
             this.endDate = endDate;
         } else throw new InvalidDatesException();
     }
@@ -32,9 +33,19 @@ public class Experience implements Comparable{
 
     public void setStartDate(Calendar startDate) throws InvalidDatesException{
         // verificam daca data de inceput corespunde
-       if (startDate.compareTo(this.endDate) < 0){  // NEVERIFICATA
            this.startDate = startDate;
-       }
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getPositon() {
+        return positon;
     }
 
     public Calendar getStartDate() {
@@ -43,6 +54,10 @@ public class Experience implements Comparable{
 
     public Calendar getEndDate() {
         return endDate;
+    }
+
+    public Company getCompany() {
+        return company;
     }
 
     @Override

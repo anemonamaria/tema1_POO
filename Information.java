@@ -50,6 +50,14 @@ public class Information {
     public void addKnownLanguages(Language language){
         this.knownLanguages.add(language);
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }
 
 class Language{
@@ -64,5 +72,9 @@ class Language{
     public Language(String name, String level){
         this.name = name;
         this.level = level;
+    }
+
+    public String getLevel() {
+        return level;
     }
 }

@@ -1,16 +1,17 @@
 10
 2001;1;30
-3                                        // info
+4
 English;Experienced
 French;Beginner
 German;Advanced
 Romanian;Expereienced
 Anemona;Moraru;anemona@mail.com;07213456;female
-2                                        // education
+2
 2015;9;1;2019;6;1;Maiorescu;liceu;10
 2019;10;1;2020;6;1;Automatica Politehnica;licenta;9.50
-1                                        // experience
+1
 2020;6;2;2020;12;12;developer;IBM
+
 1976;9;17
 2
 German;Advanced
@@ -24,8 +25,9 @@ Mihai;Ion;mihai@mail.com;075678;male
 2003;5;3;2005;6;7;junior;Oracle
 2005;8;9;2008;4;3;developer;Microsoft
 2010;2;3;2012;5;6;manager;IBM
-2012;7;8;2016;11;23;ceo;MyCompany
-2016;12;3;2020;1;1;teritory manager;Apple
+2012;7;8;2016;11;23;developer;Bitdifender
+2016;12;3;2020;1;1;developer;Apple
+
 1973;9;24
 3
 German;Advanced
@@ -40,6 +42,7 @@ Cristina;Popescu;cristina@mail.com;073456;female
 2
 2004;10;16;2014;1;1;developer;Microsoft
 2015;3;3;2020;4;5;manager;IBM
+
 2000;4;19
 2
 Serbian;Beginner
@@ -50,6 +53,7 @@ Marius;Mocanu;marius@mail.com;073453;male
 2019;10;1;2020;10;1;Politehnica;licenta;7
 1
 2020;10;2;2020;12;18;junior;Bitdifender
+
 1997;3;22
 1
 Romanian;Beginner
@@ -60,6 +64,7 @@ Ana;Ancuta;ana@mail.com;079832;female
 2
 2020;1;1;2020;6;6;junior;Oracle
 2020;6;7;2020;12;12;developer;Apple
+
 2002;2;20
 3
 Arab;Experienced
@@ -69,6 +74,7 @@ Catalina;Catalin;catalina@mail.com;073456;female
 1
 2016;9;1;2020;6;1;Maiorescu;liceu;6
 0
+
 2001;2;15
 4
 Serbian;Beginner
@@ -80,7 +86,8 @@ Cristian;Costel;cristian@mail.com;098765;male
 2015;9;1;2019;6;1;Maiorescu;liceu;8
 2019;10;1;2020;6;1;Automatica Politehnica;licenta;5.00
 1
-2020;6;2;2020;12;20;caller;Microsoft
+2020;6;2;2020;12;20;junior;Apple
+
 1995;11;25
 2
 Russian;Experienced
@@ -93,8 +100,9 @@ Ion;Ionut;ionel@mail.com;01010;male
 2017;10;3;2018;5;5;junior;Microsoft
 2018;6;6;2019;7;7;developer;Oracle
 2019;8;8;2020;10;10;manager;Apple
+
 1995;3;3
-3
+2
 Bulgarian;Advanced
 Romanian;Experienced
 Bianca;Popa;bianca2mail.com;06578;female
@@ -103,6 +111,7 @@ Bianca;Popa;bianca2mail.com;06578;female
 2013;10;1;2017;10;1;Politehnica;licenta;5
 1
 2018;2;2;2020;9;9;manager;Oracle
+
 1986;7;1
 2
 English;Experienced
@@ -116,14 +125,41 @@ Stefan;Stegaru;stefan@mail.com;0721234;male
 2016;9;9;2018;3;3;developer;Microsoft
 2018;3;4;2019;4;4;manager;Microsoft
 2019;4;5;2020;8;8;manager;Bitdifender
-10
-Anemona;Moraru;
-Mihai;Ion;
-Cristina;Popescu;
-Marius;Mocanu;
-Ana;Ancuta;
-Catalina;Catalin;
-Cristian;Costel;
-Ion;Ionut;
-Bianca;Popa;
-Stefan;Stegaru;
+
+Anemona;Moraru;3;Mihai;Ion;Cristina;Popescu;Cristian;Costel
+Mihai;Ion;2;Bianca;Popa;Marius;Mocanu
+Cristina;Popescu;5;Stefan;Stegaru;Catalina;Catalin;Anemona;Moraru;Mihai;Ion;Ana;Ancuta
+Marius;Mocanu;2;Catalina;Catalin;Ion;Ionut
+Ana;Ancuta;1;Anemona;Moraru
+Catalina;Catalin;3;Mihai;Ion;Ion;Ionut;Stefan;Stegaru
+Cristian;Costel;2;Marius;Mocanu;Stefan;Stegaru
+Ion;Ionut;4;Stefan;Stegaru;Bianca;Popa;Marius;Mocanu;Ion;Ionut
+Bianca;Popa;5;Catalina;Catalin;Ion;Ionut;Anemona;Moraru;Mihai;Ion;Ana;Ancuta
+Stefan;Stegaru;3;Anemona;Moraru;Catalina;Catalin;Ion;Ionut
+
+5
+3;Microsoft
+manager;1;1950;2020;0;50;5;10;1;7000
+developer;1;1950;2020;0;50;5;10;2;5000
+junior;1;1950;2020;0;50;5;10;3;3000
+3;Bitdifender
+manager;1;1950;2020;0;50;5;10;1;9000
+developer;1;1950;2020;0;50;5;10;3;6000
+junior;1;1950;2020;0;50;5;10;4;3500
+3;Oracle
+manager;1;1950;2020;0;50;5;10;1;8000
+developer;1;1950;2020;0;50;5;10;2;6000
+junior;1;1950;2020;0;50;5;10;4;3000
+3;Apple
+manager;1;1950;2020;0;50;5;10;1;10000
+developer;1;1950;2020;0;50;5;10;2;7000
+junior;1;1950;2020;0;50;5;10;3;3000
+2;IBM
+manager;1;1950;2020;0;50;5;10;1;6000
+developer;1;1950;2020;0;50;5;10;3;2000
+
+Microsoft, manager, developer, junior
+Bitdifender, manager, junior, developer
+Oracle, manager, developer, junior
+Apple, manager, developer, junior
+IBM, developer, manager

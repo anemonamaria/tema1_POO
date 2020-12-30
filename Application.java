@@ -4,7 +4,7 @@ import java.util.*;
 public class Application {
     public static ArrayList<Company> companies;
     public static ArrayList<User> users;
-    private ArrayList<Job> jobs;
+    public static ArrayList<Job> jobs;
 
     // Singleton pattern
     private static Application instance;
@@ -24,6 +24,10 @@ public class Application {
         return companies;
     }
 
+    public ArrayList<Job> getJobsAll(){
+        return  jobs;
+    }
+
     public Company getCompany(String name) {
         if (companies.contains(name))
             return companies.get(companies.indexOf(name));
@@ -31,7 +35,7 @@ public class Application {
     }
 
     public void add(Company company) {
-        add(company);
+        companies.add(company);
     }
 
     public void add(User user) {
@@ -66,6 +70,15 @@ public class Application {
         return availableJobs;
     }
 
-
+    public User getUser(String firstName, String lastName){
+        int index = 0;
+        for (User u : this.users){
+            if (u.getResume().getInformation().getFirstName() == firstName
+                    && u.getResume().getInformation().getLastName() == lastName){
+                index = users.indexOf(u);
+            }
+        }
+        return users.get(index);
+    }
 }
 

@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
-public abstract class User extends Consumer implements Observer{
+public class User extends Consumer implements Observer{
     private ArrayList<Notification> notifications;
+    private ArrayList<Company> interestedCompanies;
 
     public Employee convert(){ // ???
         Employee newEmployee = new Employee();
@@ -20,6 +21,14 @@ public abstract class User extends Consumer implements Observer{
         }
         score = yearsOfExperience * 1.5 + this.meanGPA();
         return score;
+    }
+
+    public void setInterestedCompanies(ArrayList<Company> interestedCompanies) {
+        this.interestedCompanies = interestedCompanies;
+    }
+
+    public ArrayList<Company> getInterestedCompanies() {
+        return interestedCompanies;
     }
 
     public void setNotifications(ArrayList<Notification> notifications) {
