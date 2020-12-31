@@ -92,6 +92,8 @@ public class Job {
 
     // O metodă prin care un utilizator aplică la un job în companie
     public void apply(User user){
+        // AICI INTRA O DATA
+        //TODO:  de ce are problema aici?
         Recruiter recruiter = this.company.geRecruiter(user);   /// DE MODFICAT FUNCTIA ASTA PT GRAF, TREBUIE MUTATA IN CLASA ASTA
         int scor = recruiter.evaluate(this, user);
         Recruiter.Request<Job, Consumer> newRequest = new Recruiter.Request<Job, Consumer>(this, user, recruiter, (double)scor);

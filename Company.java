@@ -31,6 +31,10 @@ public class Company implements Subject{
         return manager;
     }
 
+    public ArrayList<Recruiter> getRecruiters() {
+        return recruiters;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -131,11 +135,15 @@ public class Company implements Subject{
 
     // Determinarea recruiter-ului potrivit pentru un utilizator;
     public Recruiter geRecruiter(User user){
+        System.out.print("da?");
 
         //TODO: verifica getDegreeInFriendship
         ArrayList<Integer> recruiterScores = new ArrayList<>();
         for (Recruiter r : recruiters){
+            System.out.println("avem recruiteri?");
+            //TODO: de ce nu intri aici?
             recruiterScores.add(r.getDegreeInFriendship(user));
+            System.out.println(r.getDegreeInFriendship(user));
         }
         int max = 0, index = 0;
         for(Integer i : recruiterScores){

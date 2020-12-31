@@ -254,13 +254,15 @@ public class Test {
                     experience.setEndDate(endD);
                     experience.setPositon((String)exper.get("position"));
                     Company company = new Company();
-                    ArrayList<Recruiter> recruiters = new ArrayList<>();
-                    company.setRecruiters(recruiters);
+                    // recruiters list
+                    // ce naiba ai????
+                    //ArrayList<Recruiter> recruiters = new ArrayList<>();
+                    //company.setRecruiters(recruiters);
                     company.setName((String)exper.get("company"));
                     if(!application.getCompanies().contains(company))
                         application.add(company);
-                    else
-                        application.getCompanies().get(application.getCompanies().indexOf(company)).setRecruiters(recruiters);
+                    //else
+                    //    application.getCompanies().get(application.getCompanies().indexOf(company)).setRecruiters(recruiters);
                     experience.setCompany(company);
                     experiences.add(experience);
                 }
@@ -270,13 +272,21 @@ public class Test {
                         .vectors(educations,experiences)
                         .build();
                 recruiter.setResume(resume);
+                // se adauga recruiterul?
                 experiences.lastElement().getCompany().add(recruiter);
+                if (experiences.lastElement().getCompany().contains(recruiter)){
+                    System.out.println("da, contine recriuter - ul compania respectiva");
+                }
+                // de ce nu adauga recruiter aici???
                 Job job = new Job();
                 job.setSalary((int)recruiter.salary);
                 job.setJobName(experiences.lastElement().getPositon());
                 job.setCompany(experiences.lastElement().getCompany());
-                if((!application.getJobsAll().contains(job)))
+                if((!application.getJobsAll().contains(job))){
                     application.jobs.add(job);
+                    System.out.println("da, am adaugat job - ul");
+
+                }
             }
 
             for (Object o : (JSONArray)jsonObject.get("users")){
@@ -680,6 +690,7 @@ public class Test {
             }
 
             // userii care aplica
+            System.out.println("nu exista recruiteri aici in companie");
             ArrayList<Job> availableJobs = new ArrayList<>();
             for (User user : application.users){
 
@@ -689,6 +700,11 @@ public class Test {
                 }
                 availableJobs = application.getJobs(companiesName);
                 for (Job job : availableJobs){
+                    for ( Recruiter r : job.getCompany().getRecruiters()){
+                        System.out.println(" avem recruiteri");  //nu n avem
+                        // de ce nu avem recruiteri in companii?!?!?!?
+                    }
+                    //TODO: ce naiba are functia de apply???
                     job.apply(user);
                     job.getCompany().getManager().process(job);
                     // is good???
