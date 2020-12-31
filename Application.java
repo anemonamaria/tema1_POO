@@ -29,8 +29,10 @@ public class Application {
     }
 
     public Company getCompany(String name) {
-        if (companies.contains(name))
-            return companies.get(companies.indexOf(name));
+        for (Company c : companies){
+            if (c.getName().equals(name))
+                return c;
+        }
         return null;
     }
 
@@ -79,6 +81,28 @@ public class Application {
             }
         }
         return users.get(index);
+    }
+
+    public Company findCompany(String name){
+        for (Company c : companies){
+            if(c.getName().equals(name))
+                return c;
+        }
+        return null;
+    }
+
+    public static ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public User findUser(String firstName, String lastName){
+        for (User u : users){
+            if(u.getResume().getInformation().getFirstName().equals(firstName) &&
+                    u.getResume().getInformation().getLastName().equals(lastName)){
+                return u;
+            }
+        }
+        return null;
     }
 }
 

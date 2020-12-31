@@ -9,7 +9,7 @@ public abstract class Consumer {
 
     public Consumer(){
         this.resume = null;
-        this.aquaintance = null;
+        this.aquaintance = new ArrayList<>();
     }
 
     public Consumer(Resume resume, ArrayList<Consumer> aquaintance){
@@ -53,19 +53,22 @@ public abstract class Consumer {
     //Determinarea gradului de prietenie cu un alt utilizator – se realizează o parcurgere în lăt, ime în ret,eaua
     //socială a utilizatorului;
     public int getDegreeInFriendship(Consumer consumer){
-        /// DE MODIFICAT !!!! DE ADAUGAT GRAFURI
-
+        //TODO: e buna?
         int contoar = 0;
+        ArrayList<Consumer> visited  = new ArrayList<>();
         for(Consumer c : this.aquaintance){
-            if(!c.equals(consumer)){
+            visited.add(c);
+            if(c != consumer) {
+                if (!c.getAquaintance().contains(consumer)) {
+                    for (Consumer co : c.getAquaintance()) {
+                        if (!visited.contains(co)) {
+                            return co.getDegreeInFriendship(consumer) + 1;
+                        }
+                    }
+                }
+            } else if (c == consumer)
                 contoar = contoar + 1;
-
-            } else {
-                contoar = contoar + 1;
-                break;
-            }
         }
-        if (contoar == this.aquaintance.size()) return  0;
         return contoar;
     }
 

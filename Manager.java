@@ -6,7 +6,7 @@ public class Manager extends Employee{
     public static Vector<Recruiter.Request<Job, Consumer>> requests;
 
     public Manager(){
-        this.requests = null;
+        this.requests = new Vector<>();
     }
 
     public Manager(Vector<Recruiter.Request<Job, Consumer>> requests){
@@ -57,7 +57,14 @@ public class Manager extends Employee{
             newEmployee.companyName = job.getCompany().getName();
             newEmployee.salary = job.getSalary();
             // se angajeaza
-            Department.employees.add(newEmployee);
+            for(Department d : job.getCompany().getDepartments()){
+                for (Job j : d.getJobs()){
+                    if(j == job){
+                        d.getEmployees().add(newEmployee);
+                        break;
+                    }
+                }
+            }
             for(Company c : Application.companies){
                 c.removeObserver(newUser);
                 // Observer pattern - sterg din lista tuturor companiilor observatorul angajat
@@ -75,7 +82,5 @@ public class Manager extends Employee{
         company.notifyAllObservers(new Notification("Closed job!")); // ???
         // Observer pattern - job inchis
         // inchidem job-ul dupa ce trecem prin toate request-urile
-
-
     }
 }

@@ -14,8 +14,9 @@ public class Job {
 
     public Job(){
         this.jobName = "";
-        this.company = null;
+        this.company = new Company();
         this.available = true;
+        applicants = new ArrayList<>();
     }
 
     public Job(String jobName, Company companyName, Boolean availabe){
@@ -44,6 +45,10 @@ public class Job {
         return salary;
     }
 
+    public String getJobName() {
+        return jobName;
+    }
+
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -56,7 +61,7 @@ public class Job {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    public void setAcademicAverage(Constraint academicAverage) {
+    public void setAcademicAverage(Constraint<Double> academicAverage) {
         this.academicAverage = academicAverage;
     }
 
@@ -115,29 +120,29 @@ public class Job {
         else return false;
     }
 
-    public static class Constraint{
+    public static class Constraint <V extends Comparable<V>>{
         // clasa pentru definirea constrangerilor
-        public int inferior;
-        public int superior;
+        public V inferior;
+        public V superior;
 
         public Constraint(){
-            this.inferior = 0;
-            this.superior = 0;
+            this.inferior = null;
+            this.superior = null;
         }
 
-        public Constraint(int inferior, int superior){
+        public Constraint(V inferior, V superior){
             this.inferior = inferior;
             this.superior = superior;
         }
 
-        public void setConstraints(int inferior, int superior) {
-            this.inferior = inferior;
-            this.superior = superior;
+        public void setConstraints(V inferior, V superior) {
+            this.inferior = (V) inferior;
+            this.superior = (V) superior;
         }
 
         // verificam daca o valoare se incadreaza in constrangerile clasei
-        public boolean verifyX(int x){
-            if (this.inferior <= x && x <= this.superior){
+        public boolean verifyX(V x){
+            if (this.inferior.compareTo(x) > 0 && this.superior.compareTo(x) < 0){
                 return true;
             }
             return false;

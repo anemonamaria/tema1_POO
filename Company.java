@@ -9,6 +9,10 @@ public class Company implements Subject{
 
     public Company(){
         this.name = "";
+        this.manager = new Manager();
+        this.departments = new ArrayList<>();
+        this.recruiters = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
     public Company(String newName) {
@@ -23,11 +27,16 @@ public class Company implements Subject{
         this.manager = manager;
     }
 
+    public Manager getManager() {
+        return manager;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setDepartments(ArrayList<Department> departments) {
+        if (departments == null) return;
         this.departments = departments;
     }
 
@@ -123,7 +132,7 @@ public class Company implements Subject{
     // Determinarea recruiter-ului potrivit pentru un utilizator;
     public Recruiter geRecruiter(User user){
 
-         //// DE REFACUT !!! TREBUIE FACUTA CU GRAFU-URI
+        //TODO: verifica getDegreeInFriendship
         ArrayList<Integer> recruiterScores = new ArrayList<>();
         for (Recruiter r : recruiters){
             recruiterScores.add(r.getDegreeInFriendship(user));
@@ -156,6 +165,20 @@ public class Company implements Subject{
             }
         }
         return availableJobs;
+    }
+
+    public Recruiter findRecruiter(String firstName, String lastName){
+        for (Recruiter r : recruiters){
+            if(r.getResume().getInformation().getFirstName() == firstName &&
+                    r.getResume().getInformation().getLastName() == lastName){
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Department> getDepartments() {
+        return departments;
     }
 
     @Override

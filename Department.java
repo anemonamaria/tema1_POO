@@ -1,10 +1,15 @@
 import java.util.ArrayList;
 
 public abstract class Department {
-    public static ArrayList<Employee> employees;
+    public ArrayList<Employee> employees;
     public ArrayList<Job> jobs;
     private String name;
 
+    public Department(){
+        this.employees = new ArrayList<>();
+        this.jobs = new ArrayList<>();
+        this.name = "";
+    }
     // Metodă abstractă care va returna bugetul total de salarii, după aplicarea taxelor;
     public abstract double getTotalSalaryBudget(); //??
 
@@ -46,6 +51,24 @@ public abstract class Department {
 
     public void setEmployees(ArrayList<Employee> employees) {
         this.employees = employees;
+    }
+
+    public Job findJob(String jobName){
+        for(Job j : this.getJobs()){
+            if(j.getJobName().equals(jobName))
+                return j;
+        }
+        return null;
+    }
+
+    public Employee findEmployee(String firstName, String lastName){
+        for (Employee e : this.getEmployees()){
+            if(e.getResume().getInformation().getFirstName().equals(firstName) &&
+            e.getResume().getInformation().getLastName().equals(lastName)){
+                return e;
+            }
+        }
+        return null;
     }
 
     public void setJobs(ArrayList<Job> jobs) {

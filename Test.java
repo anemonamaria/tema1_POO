@@ -2,184 +2,15 @@ import netscape.javascript.JSObject;
 import org.json.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileReader;
-import java.net.UnknownServiceException;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.io.*;
-import java.util.concurrent.atomic.LongAccumulator;
 
 public class Test {
-//    public void load(){
-//        final String test = "src\\Test.txt";
-//        // Application
-//        Application application = Application.getInstance();
-//        Application.companies = new ArrayList<>();
-//        Application.users = new ArrayList<>();
-//        Application.jobs = new ArrayList<>();
-//        try{
-//            RandomAccessFile testFile = new RandomAccessFile(test, "r");
-//            int numberOfUsers = Integer.parseInt(testFile.readLine());
-//            for (int i = 0; i < numberOfUsers; i++){
-//                // Informations
-//                Information info = new Information();
-//                // birthday
-//                String birthdayLine = testFile.readLine();
-//                StringTokenizer stBirthday = new StringTokenizer(birthdayLine,";");
-//                Calendar birthday = new Calendar(Integer.parseInt(stBirthday.nextToken()),
-//                        Integer.parseInt(stBirthday.nextToken()),
-//                        Integer.parseInt(stBirthday.nextToken()));
-//                info.setBirthday(birthday);
-//
-//                // language
-//                int numberOfLanguages = Integer.parseInt(testFile.readLine());
-//                ArrayList<Language> languages = new ArrayList<>();
-//                for (int j = 0; j < numberOfLanguages; j++){
-//                    String languageLine = testFile.readLine();
-//                    StringTokenizer stLanguage = new StringTokenizer(languageLine, ";");
-//                    Language language = new Language(stLanguage.nextToken(), stLanguage.nextToken());
-//                    languages.add(language);
-//                    //System.out.println(language.getLevel());
-//                }
-//                info.setKnownLanguages(languages);
-//                String infoLine = testFile.readLine();
-//                StringTokenizer stInfo = new StringTokenizer(infoLine, ";");
-//                info.setFirstName(stInfo.nextToken());
-//                info.setLastName(stInfo.nextToken());
-//                info.setEmail(stInfo.nextToken());
-//                info.setPhone(stInfo.nextToken());
-//                info.setSex(stInfo.nextToken());
-//
-//                // education
-//                Vector<Education> educations = new Vector<>();
-//                int numberOfEducations = Integer.parseInt(testFile.readLine());
-//                for(int j = 0; j < numberOfEducations; j++){
-//                    String educationLine = testFile.readLine();
-//                    StringTokenizer stEducation = new StringTokenizer(educationLine, ";");
-//                    Education education = new Education();
-//                    try{
-//                        education.setStartDate(new Calendar(Integer.parseInt(stEducation.nextToken()),
-//                                Integer.parseInt(stEducation.nextToken()),
-//                                Integer.parseInt(stEducation.nextToken())));
-//                    } catch (Education.InvalidDatesException e){
-//                        throw new Education.InvalidDatesException();
-//                    }
-//                    try{
-//                        education.setEndDate(new Calendar(Integer.parseInt(stEducation.nextToken()),
-//                                Integer.parseInt(stEducation.nextToken()),
-//                                Integer.parseInt(stEducation.nextToken())));
-//                    } catch (Education.InvalidDatesException e){
-//                        throw new Education.InvalidDatesException();
-//                    }
-//                    education.setInstitution(stEducation.nextToken());
-//                    education.setLevel(stEducation.nextToken());
-//                    education.setFinalAverage(Double.parseDouble(stEducation.nextToken()));
-//                    educations.add(education);
-//                }
-//
-//                // experience
-//                Vector<Experience> experiences = new Vector<>();
-//                int numberOfExperiences = Integer.parseInt(testFile.readLine());
-//                for (int j = 0; j < numberOfExperiences; j++){
-//                    String experiencesLine = testFile.readLine();
-//                    StringTokenizer stExperience = new StringTokenizer(experiencesLine, ";");
-//                    Experience experience = new Experience();
-//                    try{
-//                        experience.setStartDate(new Calendar(Integer.parseInt(stExperience.nextToken()),
-//                                Integer.parseInt(stExperience.nextToken()),
-//                                Integer.parseInt(stExperience.nextToken())));
-//                    } catch (Experience.InvalidDatesException e){
-//                        throw new Experience.InvalidDatesException();
-//                    }
-//                    try {
-//                        experience.setEndDate(new Calendar(Integer.parseInt(stExperience.nextToken()),
-//                                Integer.parseInt(stExperience.nextToken()),
-//                                Integer.parseInt(stExperience.nextToken())));
-//                    } catch (Experience.InvalidDatesException e){
-//                        throw new Experience.InvalidDatesException();
-//                    }
-//                    experience.setPositon(stExperience.nextToken());
-//                    Company c = new Company(stExperience.nextToken());
-//                    Application.companies.add(c);
-//                    experience.setCompany(c);
-//                }
-//
-//                // resume
-//                Consumer.Resume resume = new Consumer.Resume.ResumeBuilder(info)
-//                        .vectors(educations, experiences)
-//                        .build();
-//
-//                // User
-//                User user = new User() {
-//                    @Override
-//                    public Employee convert() {
-//                        return super.convert();
-//                    }
-//                };
-//                user.setResume(resume);
-//
-//                //Application
-//                application.users.add(user); // ???
-//
-//                testFile.readLine(); //linie de diferentiere
-//            }
-//
-//            for(int i = 0; i < numberOfUsers; i++){
-//                // ArrayList Aquaintance
-//                //lista de cunostinte --- DE MODIFICAT SI FACUT GRAF
-//                String aquaintancesLine = testFile.readLine();
-//                StringTokenizer stAquaintances = new StringTokenizer(aquaintancesLine, ";");
-//                String firstName = stAquaintances.nextToken();
-//                String lastName = stAquaintances.nextToken();
-//                int numberOfAquaintances = Integer.parseInt(stAquaintances.nextToken());
-//                User u = application.getUser(firstName,lastName);
-//                ArrayList<Consumer> aquaintances = new ArrayList<>();
-//                for ( int j = 0; j < numberOfAquaintances; j++){
-//                    aquaintances.add(application.getUser(stAquaintances.nextToken(), stAquaintances.nextToken()));
-//                }
-//                application.getUser(firstName,lastName).setAquaintance(aquaintances); // buna??
-//            }
-//            testFile.readLine(); //linie de diferentiere
-//
-//            int numberOfCompanies = Integer.parseInt(testFile.readLine());
-//            for (int i = 0; i < numberOfCompanies; i++){
-//                StringTokenizer stCompanyInfo = new StringTokenizer(testFile.readLine(), ";");
-//                int numberOfJobs = Integer.parseInt(stCompanyInfo.nextToken());
-//                String companyName = stCompanyInfo.nextToken();
-//                for (int j = 0; j < numberOfJobs; j++){
-//                    //job
-//                    Job job = new Job();
-//                    job.setCompany(application.getCompany(companyName));
-//                    String jobLine = testFile.readLine();
-//                    StringTokenizer stJob = new StringTokenizer(jobLine, ";");
-//                    job.setJobName(stJob.nextToken());
-//                    int available = Integer.parseInt(stJob.nextToken());
-//                    if (available == 1)
-//                        job.setAvailable(true);
-//                    else job.setAvailable(false);
-//                    // Constraints
-//                    Job.Constraint graduationYear = new Job.Constraint(Integer.parseInt(stJob.nextToken()), Integer.parseInt(stJob.nextToken()));
-//                    job.setGraduation(graduationYear);
-//                    Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJob.nextToken()), Integer.parseInt(stJob.nextToken()));
-//                    job.setExperience(experience);
-//                    Job.Constraint academicAverage = new Job.Constraint(Integer.parseInt(stJob.nextToken()), Integer.parseInt(stJob.nextToken()));
-//                    job.setAcademicAverage(academicAverage);
-//                    job.setNumberOfEmployees(Integer.parseInt(stJob.nextToken()));
-//                    job.setSalary(Integer.parseInt(stJob.nextToken()));
-//                    // job fara applicants
-//                    application.jobs.add(job);
-//                }
-//            }
-//        }
-//        catch(IOException | Education.InvalidDatesException | Experience.InvalidDatesException e){
-//            e.printStackTrace();
-//        }
-//    }
 
     public Test(String filename) throws Exception {
         try{
@@ -266,8 +97,6 @@ public class Test {
                     experience.setPositon((String)exper.get("position"));
                     experience.setDepartment((String)exper.get("departament"));
                     Company company = new Company();
-                    ArrayList<Department> departments = new ArrayList<>();
-                    company.setDepartments(departments);
                     String typeOfDepartment = (String)exper.get("departament");
                     switch(typeOfDepartment){
                         case "IT":
@@ -279,7 +108,7 @@ public class Test {
                             };
                             newDepartment.setName(typeOfDepartment);
                             newDepartment.employees = new ArrayList<>();
-                            if(!company.contains(newDepartment))
+                            if(company.getDepartment(newDepartment.getName()) == null)
                                 company.add(newDepartment);
                         case "Management":
                             Management newDepartmentM = new Management() {
@@ -290,7 +119,7 @@ public class Test {
                             };
                             newDepartmentM.setName(typeOfDepartment);
                             newDepartmentM.employees = new ArrayList<>();
-                            if(!company.contains(newDepartmentM))
+                            if(company.getDepartment(newDepartmentM.getName()) == null)
                                 company.add(newDepartmentM);
                         case "Marketing":
                             Marketing newDepartmentMarketing = new Marketing() {
@@ -301,7 +130,7 @@ public class Test {
                             };
                             newDepartmentMarketing.setName(typeOfDepartment);
                             newDepartmentMarketing.employees = new ArrayList<>();
-                            if(!company.contains(newDepartmentMarketing))
+                            if(company.getDepartment(newDepartmentMarketing.getName()) == null)
                                 company.add(newDepartmentMarketing);
                         case "Finance":
                             Finance newDepartmentF = new Finance() {
@@ -312,7 +141,7 @@ public class Test {
                             };
                             newDepartmentF.setName(typeOfDepartment);
                             newDepartmentF.employees = new ArrayList<>();
-                            if(!company.contains(newDepartmentF))
+                            if(company.getDepartment(newDepartmentF.getName()) == null)
                                 company.add(newDepartmentF);
                         case "HR":
                             Department newDep = new Department() {
@@ -323,12 +152,14 @@ public class Test {
                             };
                             newDep.setName(typeOfDepartment);
                             newDep.employees = new ArrayList<>();
-                            if(!company.contains(newDep))
+                            if(company.getDepartment(newDep.getName()) == null)
                                 company.add(newDep);
                     }
                     company.setName((String)exper.get("company"));
                     if(!application.getCompanies().contains(company))
                         application.add(company);
+                    else
+                        application.getCompany(company.getName()).setDepartments(company.getDepartments());
                     experience.setCompany(company);
                     experiences.add(experience);
                 }
@@ -423,10 +254,13 @@ public class Test {
                     experience.setEndDate(endD);
                     experience.setPositon((String)exper.get("position"));
                     Company company = new Company();
-
+                    ArrayList<Recruiter> recruiters = new ArrayList<>();
+                    company.setRecruiters(recruiters);
                     company.setName((String)exper.get("company"));
                     if(!application.getCompanies().contains(company))
                         application.add(company);
+                    else
+                        application.getCompanies().get(application.getCompanies().indexOf(company)).setRecruiters(recruiters);
                     experience.setCompany(company);
                     experiences.add(experience);
                 }
@@ -436,6 +270,7 @@ public class Test {
                         .vectors(educations,experiences)
                         .build();
                 recruiter.setResume(resume);
+                experiences.lastElement().getCompany().add(recruiter);
                 Job job = new Job();
                 job.setSalary((int)recruiter.salary);
                 job.setJobName(experiences.lastElement().getPositon());
@@ -633,6 +468,7 @@ public class Test {
                         .vectors(educations,experiences)
                         .build();
                 manager.setResume(resume);
+                experiences.lastElement().getCompany().setManager(manager);
                 Job job = new Job();
                 job.setSalary((int)manager.salary);
                 job.setJobName(experiences.lastElement().getPositon());
@@ -640,13 +476,234 @@ public class Test {
                 if((!application.getJobsAll().contains(job)))
                     application.jobs.add(job);
             }
+
+            final String test = new String("src\\Acquaintances.txt");
+            RandomAccessFile testFile = new RandomAccessFile(test, "r");
+            int numberOfCategories = Integer.parseInt(testFile.readLine());
+            for (int i = 0;  i < numberOfCategories; i++){
+                String consumerInfo = testFile.readLine();
+                StringTokenizer stConsumerIfo = new StringTokenizer(consumerInfo, ";");
+                String typeOfConsumer = stConsumerIfo.nextToken();
+                int numberOfConsumers = Integer.parseInt(stConsumerIfo.nextToken());
+                switch (typeOfConsumer){
+                    case "employees":
+                        for (int j = 0; j < numberOfConsumers; j++){
+                            String emplInfo = testFile.readLine();
+                            StringTokenizer stEmployeeInfo = new StringTokenizer(emplInfo, ";");
+                            String firstName = stEmployeeInfo.nextToken();
+                            String lastName = stEmployeeInfo.nextToken();
+                            int numberOfAcquaintanes = Integer.parseInt(stEmployeeInfo.nextToken());
+                          //  System.out.println("firstName " +firstName + " lastName " + lastName + numberOfAcquaintanes);
+
+                            if (numberOfAcquaintanes > 0){
+                                for(Company c : application.getCompanies()){
+                                    for (Department d : c.getDepartments()){
+                                        for (Employee e : d.getEmployees()) {
+                                            if (d.findEmployee(firstName,lastName) != null) {
+                                                // am gasit employee-ul
+                                                for (int k = 0; k < numberOfAcquaintanes; k++) {
+                                                    String firstNameAcq = stEmployeeInfo.nextToken();
+                                                    String lastNameAcq = stEmployeeInfo.nextToken();
+                                                    // daca are prieteni employee
+                                                    for (Company co : application.getCompanies()) {
+                                                        for (Department de : co.getDepartments()) {
+                                                            if (de.findEmployee(firstNameAcq, lastNameAcq) != null) {
+                                                                d.findEmployee(firstName, lastName).add(de.findEmployee(firstNameAcq, lastNameAcq));
+                                                            }
+                                                            //adaugam la employee-ul gasit prietenul employee
+                                                        }
+                                                    }
+                                                    // daca are prieteni user
+                                                    if (application.findUser(firstNameAcq, lastNameAcq) != null) {
+                                                        d.findEmployee(firstName, lastName).add(application.findUser(firstNameAcq, lastNameAcq));
+                                                        // adaugam la employee prietenul user
+                                                    }
+                                                    //daca are prieteni recruiteri
+                                                    for (Company comp : application.getCompanies()) {
+                                                        if (comp.findRecruiter(firstNameAcq, lastNameAcq) != null) {
+                                                            d.findEmployee(firstName, lastName).add(comp.findRecruiter(firstNameAcq, lastNameAcq));
+                                                        }
+                                                        // adaugam la employee ul gasit prietenul recruiter
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case "recruiters":
+                        for (int j = 0; j < numberOfConsumers; j++){
+                            String recrInfo = testFile.readLine();
+                            StringTokenizer stRecruiterInfo = new StringTokenizer(recrInfo, ";");
+                            String firstName = stRecruiterInfo.nextToken();
+                            String lastName = stRecruiterInfo.nextToken();
+                            int numberOfAcquaintanes = Integer.parseInt(stRecruiterInfo.nextToken());
+                            for (Company c : application.getCompanies()){
+                                if (c.findRecruiter(firstName,lastName) != null){
+                                    // am gasit recruiter-ul
+                                    for (int k = 0; k < numberOfAcquaintanes; k ++){
+                                        String firstNameAcq = stRecruiterInfo.nextToken();
+                                        String lastNameAcq = stRecruiterInfo.nextToken();
+                                        // daca are prieteni employee
+                                        for(Company co : application.getCompanies()){
+                                            for (Department de : co.getDepartments()){
+                                                if(de.findEmployee(firstNameAcq,lastNameAcq) != null){
+                                                    c.findRecruiter(firstName,lastName).add(de.findEmployee(firstNameAcq,lastNameAcq));
+                                                }
+                                                //adaugam la recruiter-ul gasit prietenul employee
+                                            }
+                                        }
+                                        // daca are prieteni user
+                                        if (application.findUser(firstNameAcq,lastNameAcq) != null){
+                                            c.findRecruiter(firstName,lastName).add(application.findUser(firstNameAcq,lastNameAcq));
+                                            // adaugam la recruiter-ul gasit prietenul user
+                                        }
+                                        //daca are prieteni recruiteri
+                                        for(Company comp : application.getCompanies()){
+                                            if(comp.findRecruiter(firstNameAcq,lastNameAcq) != null){
+                                                c.findRecruiter(firstName,lastName).add(comp.findRecruiter(firstNameAcq,lastNameAcq));
+                                            }
+                                            // adaugam la recruiter ul gasit prietenul recruiter
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case "users":
+                        for (int j = 0; j < numberOfConsumers; j++) {
+                            String userInfo = testFile.readLine();
+                            StringTokenizer stUserInfo = new StringTokenizer(userInfo, ";");
+                            String firstName = stUserInfo.nextToken();
+                            String lastName = stUserInfo.nextToken();
+                            int numberOfAcquaintanes = Integer.parseInt(stUserInfo.nextToken());
+                            if(application.findUser(firstName,lastName) != null){
+                                // daca am gasit user-ul
+                                for (int k = 0; k < numberOfAcquaintanes; k ++) {
+                                    String firstNameAcq = stUserInfo.nextToken();
+                                    String lastNameAcq = stUserInfo.nextToken();
+                                    // daca are prieteni employee
+                                    for(Company co : application.getCompanies()){
+                                        for (Department de : co.getDepartments()){
+                                            if(de.findEmployee(firstNameAcq,lastNameAcq) != null){
+                                                application.findUser(firstName,lastName).add(de.findEmployee(firstNameAcq,lastNameAcq));
+                                            }
+                                            //adaugam la user-ul gasit prietenul employee
+                                        }
+                                    }
+                                    // daca are prieteni user
+                                    if (application.findUser(firstNameAcq,lastNameAcq) != null){
+                                        application.findUser(firstName,lastName).add(application.findUser(firstNameAcq,lastNameAcq));
+                                        // adaugam la recruiter-ul gasit prietenul user
+                                    }
+                                    //daca are prieteni recruiteri
+                                    for(Company comp : application.getCompanies()){
+                                        if(comp.findRecruiter(firstNameAcq,lastNameAcq) != null){
+                                            application.findUser(firstName,lastName).add(comp.findRecruiter(firstNameAcq,lastNameAcq));
+                                        }
+                                        // adaugam la recruiter ul gasit prietenul recruiter
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    //testFile.readLine();
+                }
+            }
+
+            // introducem job-urile disponibile
+            final String testJob = new String("src\\Jobs.txt");
+            RandomAccessFile testFileJob = new RandomAccessFile(testJob, "r");
+            int numberOfCompanies = Integer.parseInt(testFileJob.readLine());
+            for (int i = 0; i < numberOfCompanies; i++){
+                String companyInfo = testFileJob.readLine();
+                StringTokenizer stCompanyInfo = new StringTokenizer(companyInfo, ";");
+                String companyName = stCompanyInfo.nextToken();
+                String depName = testFileJob.readLine();
+                int numberOfJobs = Integer.parseInt(stCompanyInfo.nextToken());
+                for (Company company : application.getCompanies()){
+                    if(company.getName().equals(companyName)){
+                        for (Department department : company.getDepartments()){
+                            if(department.getName().equals(depName)){
+                                for(int j = 0; j < numberOfJobs; j++){
+                                    String jobInfo = testFileJob.readLine();
+                                    StringTokenizer stJobInfo = new StringTokenizer(jobInfo, ";");
+                                    String jobName = stJobInfo.nextToken();
+                                    if(department.findJob(jobName) != null) {
+                                        if (Integer.parseInt(stJobInfo.nextToken()) == 1) {
+                                            department.findJob(jobName).setAvailable(true);
+                                        } else
+                                            department.findJob(jobName).setAvailable(false);
+                                        department.findJob(jobName).setNumberOfEmployees(Integer.parseInt(stJobInfo.nextToken()));
+                                        Job.Constraint gradYear = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
+                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        department.findJob(jobName).setGraduation(gradYear);
+                                        Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
+                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        department.findJob(jobName).setExperience(experience);
+                                        Job.Constraint average = new Job.Constraint(Double.parseDouble(stJobInfo.nextToken()),
+                                                Double.parseDouble(stJobInfo.nextToken()));
+                                        department.findJob(jobName).setAcademicAverage(average);
+                                    }
+                                    else{
+                                        Job newJob = new Job();
+                                        newJob.setJobName(jobName);
+                                        int available = Integer.parseInt(stJobInfo.nextToken());
+                                        if (available == 1) {
+                                            newJob.setAvailable(true);
+                                        } else
+                                            newJob.setAvailable(false);
+                                        int nrOfEmployees = Integer.parseInt(stJobInfo.nextToken());
+                                        newJob.setNumberOfEmployees(nrOfEmployees);
+                                        Job.Constraint gradYear = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
+                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        newJob.setGraduation(gradYear);
+                                        Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
+                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        newJob.setExperience(experience);
+                                        Job.Constraint average = new Job.Constraint(Double.parseDouble(stJobInfo.nextToken()),
+                                                Double.parseDouble(stJobInfo.nextToken()));
+                                        newJob.setAcademicAverage(average);
+                                        newJob.setCompany(company);
+                                        department.add(newJob);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // userii care aplica
+            ArrayList<Job> availableJobs = new ArrayList<>();
+            for (User user : application.users){
+
+                ArrayList<String> companiesName = new ArrayList<>();
+                for (Company c : user.getInterestedCompanies()){
+                    companiesName.add(c.getName());
+                }
+                availableJobs = application.getJobs(companiesName);
+                for (Job job : availableJobs){
+                    job.apply(user);
+                    job.getCompany().getManager().process(job);
+                    // is good???
+                    //TODO: verifica daca astia aplica la job
+                    //TODO: verifica request-urile daca sunt trimise
+                }
+            }
+
         }  catch (IOException | ParseException e){
             e.printStackTrace();
         }
     }
+    //TODO: fisiser pentru aplicarea userilor
 
     public static void main(String[] args) throws Exception {
         Test test = new Test("consumers.json");
-        //test.load();
     }
 }
