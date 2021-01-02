@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.Vector;
 
 public class Manager extends Employee{
-    public static Vector<Recruiter.Request<Job, Consumer>> requests;
+    public Vector<Recruiter.Request<Job, Consumer>> requests;
 
     public Manager(){
         this.requests = new Vector<>();
@@ -17,8 +17,10 @@ public class Manager extends Employee{
         ArrayList<Recruiter.Request<Job, Consumer>> possibleApplicants = new ArrayList<>();
         for (Recruiter.Request<Job, Consumer> r : requests) {
             Consumer user = r.getValue1();
+            System.out.println("hmmmmmmm");   //TODO DE CE E UN SINGUR REQUEST
             if (job.meetsRequirments((User) user)) {
                 possibleApplicants.add(r);
+                System.out.println("hmmm");   //TODO: REPARA FUNCTIA ASTA
                 /// fac o lista cu toti utilizatorii care intrunesc conditii
             }
             else ((User) user).update(new Notification("You were rejected!"));
@@ -30,18 +32,23 @@ public class Manager extends Employee{
 
         while(copyNumberOfEmployees != 0 && !possibleApplicants.contains(null)){
             Recruiter.Request<Job, Consumer> aux = null;
+            System.out.println("mhhhhh");
             for (Recruiter.Request<Job, Consumer> req : possibleApplicants){
+                System.out.println(req.getScore());
                 if (max <= req.getScore()){
+                    System.out.println("ajungi ????");
                     max = req.getScore();
                     aux = req;
                     // aleg utilizatorul cu cel mai mare scor
                 }
             }
-            if (!Application.users.contains(aux.getValue1())){
-                sortedList.add(aux);
-                // il adaug in lista sortata descrescator daca nu este angajat intre timp
-                copyNumberOfEmployees = copyNumberOfEmployees - 1;
-                // sterg o pozitie din numarul pozitiilor disponibile
+            if(aux.getValue1()!= null){
+                if (!Application.users.contains(aux.getValue1())) {
+                    sortedList.add(aux);
+                    // il adaug in lista sortata descrescator daca nu este angajat intre timp
+                    copyNumberOfEmployees = copyNumberOfEmployees - 1;
+                    // sterg o pozitie din numarul pozitiilor disponibile
+                }
             }
             possibleApplicants.remove(aux);
             // il sterg din lista pentru a putea gasi urmatorul utilizator cu cel mai mare scor

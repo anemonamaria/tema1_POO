@@ -4,7 +4,7 @@ import java.util.*;
 public class Application {
     public static ArrayList<Company> companies;
     public static ArrayList<User> users;
-    public static ArrayList<Job> jobs;
+    //public static ArrayList<Job> jobs;
 
     // Singleton pattern
     private static Application instance;
@@ -24,9 +24,9 @@ public class Application {
         return companies;
     }
 
-    public ArrayList<Job> getJobsAll(){
-        return  jobs;
-    }
+//    public ArrayList<Job> getJobsAll(){
+//        return  jobs;
+//    }
 
     public Company getCompany(String name) {
         for (Company c : companies){
@@ -63,16 +63,14 @@ public class Application {
     public ArrayList<Job> getJobs(List<String> companies) {
         ArrayList<Job> availableJobs = new ArrayList<>();
         for (String c : companies){
-            for (Job j : this.jobs){
-                if (j.getCompany().getName().equals(c) && j.getAvailable()){
-                    availableJobs.add(j);
-                }
+            for ( Department d : getCompany(c).getDepartments()){
+                availableJobs.addAll(d.getJobs());
             }
         }
         return availableJobs;
     }
 
-    public User getUser(String firstName, String lastName){
+    public User getUser(String firstName, String lastName) {
         int index = 0;
         for (User u : this.users){
             if (u.getResume().getInformation().getFirstName() == firstName
@@ -81,14 +79,6 @@ public class Application {
             }
         }
         return users.get(index);
-    }
-
-    public Company findCompany(String name){
-        for (Company c : companies){
-            if(c.getName().equals(name))
-                return c;
-        }
-        return null;
     }
 
     public static ArrayList<User> getUsers() {
@@ -104,5 +94,30 @@ public class Application {
         }
         return null;
     }
+
+
+    public Consumer findConsumer(String firstName, String lastName) {
+        Consumer res = findUser(firstName, lastName);
+        if(res != null) return res;
+
+        for(Company c : companies) {
+            for(Department d : c.getDepartments())
+                for (Employee e : d.getEmployees())
+                    {
+                    if(e.getResume().getInformation().getFirstName().equals(firstName)
+                            && e.getResume().getInformation().getLastName().equals(lastName))
+                            return e;
+                    }
+            for(Recruiter r : c.getRecruiters()) {
+                if(r.getResume().getInformation().getFirstName().equals(firstName)
+                         && r.getResume().getInformation().getLastName().equals(lastName))
+                        return r;
+            }
+        }
+
+        return  null;
+    }
+
+
 }
 

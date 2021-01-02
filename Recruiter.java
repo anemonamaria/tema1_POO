@@ -11,6 +11,8 @@ public class Recruiter extends Employee {
         // specifica metoda in testare
         double evaluation = this.rating * user.getTotalScore();
         this.used();
+        Recruiter.Request<Job, Consumer> newRequest = new Recruiter.Request<Job, Consumer>(job, user, this, (double)evaluation);
+        Application.getInstance().getCompany(this.companyName).getManager().requests.add(newRequest);
         return (int) evaluation;
     }
 

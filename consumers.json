@@ -4,6 +4,7 @@
             "name": "Harmony Lorinda",
             "email": "harmonyl@gmail.com",
             "phone": "+4111111111",
+            "date_of_birth": "12.01.1986",
             "genre": "female",
             "languages": ["English", "French"],
             "languages_level": ["Experienced", "Beginner"],
@@ -45,6 +46,7 @@
             "name": "Shana Addy",
             "email": "shanad@gmail.com",
             "phone": "+4111111112",
+            "date_of_birth": "20.04.1995",
             "genre": "male",
             "languages": ["English", "German"],
             "languages_level": ["Experienced", "Experienced"],
@@ -79,6 +81,7 @@
             "name": "Leyla Stacy",
             "email": "leylas@gmail.com",
             "phone": "+4111111113",
+            "date_of_birth": "27.11.1994",
             "genre": "female",
             "languages": ["English"],
             "languages_level": ["Experienced"],
@@ -113,6 +116,7 @@
             "name": "Jarred Egbert",
             "email": "jarredeg@gmail.com",
             "phone": "+4111111114",
+            "date_of_birth": "07.10.1986",
             "genre": "male",
             "languages": ["English", "German"],
             "languages_level": ["Experienced", "Advanced"],
@@ -161,6 +165,7 @@
             "name": "Bethney Kiara",
             "email": "bethneyk@gmail.com",
             "phone": "+4111111115",
+            "date_of_birth": "10.10.1993",
             "genre": "female",
             "languages": ["English"],
             "languages_level": ["Experienced"],
@@ -184,8 +189,8 @@
             "experience": [
                 {
                     "company": "Amazon",
-                    "position": "HR agent",
-                    "departament": "HR",
+                    "position": "Marketing agent",
+                    "departament": "Marketing",
                     "start_date": "01.07.2019",
                     "end_date": null
                 }
@@ -195,6 +200,7 @@
             "name": "Rolland Lyla",
             "email": "rollandly@gmail.com",
             "phone": "+4111111116",
+            "date_of_birth": "01.01.1986",
             "genre": "female",
             "languages": ["English", "French"],
             "languages_level": ["Experienced", "Experienced"],
@@ -250,6 +256,7 @@
             "name": "Steward Goodwin",
             "email": "stewardg@gmail.com",
             "phone": "+4111111117",
+            "date_of_birth": "13.04.1996",
             "genre": "male",
             "languages": ["English"],
             "languages_level": ["Experienced"],
@@ -284,6 +291,7 @@
             "name": "Molly Rylie",
             "email": "mollyr@gmail.com",
             "phone": "+4111111118",
+            "date_of_birth": "03.04.1976",
             "genre": "female",
             "languages": ["English", "French", "Chinese"],
             "languages_level": ["Experienced", "Experienced","Beginner"],
@@ -306,7 +314,7 @@
             ],
             "experience": [
                 {
-                    "company": "Sofwire",
+                    "company": "Softwire",
                     "position": "Marketing",
                     "departament": "Marketing",
                     "start_date": "01.07.2006",
@@ -339,6 +347,7 @@
             "name": "Morley Denise",
             "email": "morleyd@gmail.com",
             "phone": "+4111111119",
+            "date_of_birth": "01.01.1997",
             "genre": "female",
             "languages": ["English"],
             "languages_level": ["Experienced"],
@@ -373,6 +382,7 @@
             "name": "Bryson Reenie",
             "email": "brysonr@gmail.com",
             "phone": "+4111111110",
+            "date_of_birth": "18.03.1983",
             "genre": "male",
             "languages": ["English", "German", "French"],
             "languages_level": ["Experienced", "Experienced", "Advanced"],
@@ -396,15 +406,15 @@
             "experience": [
                 {
                     "company": "Softwire",
-                    "position": "HR",
-                    "departament": "HR",
+                    "position": "Marketing",
+                    "departament": "Marketing",
                     "start_date": "01.07.2011",
                     "end_date": "01.04.2015"
                 },
                 {
                     "company": "Google",
-                    "position": "HR",
-                    "departament": "HR",
+                    "position": "Marketing",
+                    "departament": "Marketing",
                     "start_date": "01.10.2015",
                     "end_date": null
                 }
@@ -416,6 +426,7 @@
             "name": "Jonie Phillip",
             "email": "jphilip@gmail.com",
             "phone": "+4123456789",
+            "date_of_birth": "02.02.1980",
             "genre": "male",
             "languages": ["English", "French"],
             "languages_level": ["Experienced", "Experienced"],
@@ -455,6 +466,7 @@
             "name": "Janine Woody",
             "email": "jwoody@gmail.com",
             "phone": "+4123456987",
+            "date_of_birth": "12.12.1989",
             "genre": "male",
             "languages": ["English", "French"],
             "languages_level": ["Experienced", "Advanced"],
@@ -488,6 +500,7 @@
             "name": "Darrell Lillie",
             "email": "dlillie@amazon.com",
             "phone": "+4333333333",
+            "date_of_birth": "05.05.1983",
             "genre": "male",
             "languages": ["English"],
             "languages_level": ["Experienced"],
@@ -521,6 +534,7 @@
             "name": "Damian Bodhi",
             "email": "dbodhi@amazon.com",
             "phone": "+4444444444",
+            "date_of_birth": "29.06.1988",
             "genre": "male",
             "languages": ["English", "French"],
             "languages_level": ["Experienced", "Beginner"],
@@ -562,6 +576,7 @@
             "name": "Daniel Edmund",
             "email": "dedmund@gmail.com",
             "phone": "+4444444444",
+            "date_of_birth": "20.10.1982",
             "genre": "male",
             "languages": ["English", "French"],
             "languages_level": ["Experienced", "Beginner"],
@@ -594,7 +609,7 @@
                     "company": "MIT",
                     "position": "Researcher",
                     "start_date": "01.05.2015",
-                    "end_date": null
+                    "end_date": "01.06.2016"
                 }
             ]
         },
@@ -602,6 +617,7 @@
             "name": "Julia Matvei",
             "email": "jmatvei@gmail.com",
             "phone": "+4555555555",
+            "date_of_birth": "10.11.1988",
             "genre": "female",
             "languages": ["English", "German"],
             "languages_level": ["Experienced", "Beginner"],
@@ -634,7 +650,7 @@
                     "company": "NXP",
                     "position": "SDE",
                     "start_date": "01.05.2015",
-                    "end_date": null
+                    "end_date": "01.03.2017"
                 }
             ]
         },
@@ -642,6 +658,7 @@
             "name": "Tamara Haci",
             "email": "thaci@gmail.com",
             "phone": "+4444444444",
+            "date_of_birth": "15.02.1988",
             "genre": "make",
             "languages": ["English"],
             "languages_level": ["Experienced"],
@@ -679,7 +696,7 @@
                     "company": "Bloomberg",
                     "position": "SDE",
                     "start_date": "01.05.2017",
-                    "end_date": null
+                    "end_date": "01.08.2018"
                 }
             ]
         },
@@ -687,6 +704,7 @@
             "name": "Linette Spartak",
             "email": "lspartak@gmail.com",
             "phone": "+4444444444",
+            "date_of_birth": "05.08.1998",
             "genre": "male",
             "languages": ["English", "French", "Russian", "Portuguese"],
             "languages_level": ["Experienced", "Experienced", "Advanced", "Beginner"],
@@ -718,7 +736,7 @@
                     "company": "Edenred Digital",
                     "position": "SDE",
                     "start_date": "01.11.2018",
-                    "end_date": null
+                    "end_date": "01.11.2019"
                 }
             ]
         }
@@ -728,6 +746,7 @@
             "name": "Sundar Pichai",
             "email": "spichai@gmail.com",
             "phone": "+4444444444",
+            "date_of_birth": "12.07.1972",
             "genre": "male",
             "languages": ["English", "French", "Indian"],
             "languages_level": ["Experienced", "Experienced", "Experienced"],
@@ -761,6 +780,7 @@
             "name": "Jeff Bezos",
             "email": "jbezos@amaon.com",
             "phone": "+4444444444",
+            "date_of_birth": "12.01.1964",
             "genre": "male",
             "languages": ["English", "French", "German"],
             "languages_level": ["Experienced", "Experienced", "Experienced"],

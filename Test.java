@@ -17,7 +17,6 @@ public class Test {
             Application application = Application.getInstance();
             Application.companies = new ArrayList<>();
             Application.users = new ArrayList<>();
-            Application.jobs = new ArrayList<>();
 
             FileReader reader = new FileReader(filename);
             JSONObject jsonObject = (JSONObject) new JSONParser().parse(reader);
@@ -34,6 +33,13 @@ public class Test {
                 information.setPhone((String)empl.get("phone"));
                 information.setSex((String)empl.get("genre"));
                 information.setEmail((String)empl.get("email"));
+                String dateOfBirth = (String)empl.get("date_of_birth");
+                StringTokenizer stDateOfBirth = new StringTokenizer(dateOfBirth, ".");
+                Calendar stBDay = new Calendar();
+                stBDay.setDay(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setMonth(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setYear(Integer.parseInt(stDateOfBirth.nextToken()));
+                information.setBirthday(stBDay);
                 ArrayList<Language> languages = new ArrayList<>();
                 ArrayList<String> languagesName = new ArrayList<>();
                 int countLanguages = 0;
@@ -75,7 +81,7 @@ public class Test {
                     educations.add(education);
                 }
                 Vector<Experience> experiences = new Vector<>();
-                for (Object ex : (JSONArray)empl.get("experience")){
+                for (Object ex : (JSONArray)empl.get("experience")) {
                     JSONObject exper = (JSONObject)ex;
                     Experience experience = new Experience();
                     String startDate = (String)exper.get("start_date");
@@ -98,85 +104,101 @@ public class Test {
                     experience.setDepartment((String)exper.get("departament"));
                     Company company = new Company();
                     String typeOfDepartment = (String)exper.get("departament");
+
+
+
+                    /*
                     switch(typeOfDepartment){
                         case "IT":
-                            IT newDepartment = new IT() {
-                                @Override
-                                public double getTotalSalaryBudget() {
-                                    return super.getTotalSalaryBudget();
-                                }
-                            };
+                            IT newDepartment = new IT();
                             newDepartment.setName(typeOfDepartment);
-                            newDepartment.employees = new ArrayList<>();
                             if(company.getDepartment(newDepartment.getName()) == null)
                                 company.add(newDepartment);
                         case "Management":
-                            Management newDepartmentM = new Management() {
-                                @Override
-                                public double getTotalSalaryBudget() {
-                                    return super.getTotalSalaryBudget();
-                                }
-                            };
+                            Management newDepartmentM = new Management();
                             newDepartmentM.setName(typeOfDepartment);
-                            newDepartmentM.employees = new ArrayList<>();
-                            if(company.getDepartment(newDepartmentM.getName()) == null)
+                            if(company.getDepartment(newDepartmentM.getName()) == null)//application.getCompany((String)exper.get("company")).getDepartment(newDepartmentM.getName()) == null
                                 company.add(newDepartmentM);
                         case "Marketing":
-                            Marketing newDepartmentMarketing = new Marketing() {
-                                @Override
-                                public double getTotalSalaryBudget() {
-                                    return super.getTotalSalaryBudget();
-                                }
-                            };
+                            Marketing newDepartmentMarketing = new Marketing() ;
                             newDepartmentMarketing.setName(typeOfDepartment);
-                            newDepartmentMarketing.employees = new ArrayList<>();
                             if(company.getDepartment(newDepartmentMarketing.getName()) == null)
                                 company.add(newDepartmentMarketing);
                         case "Finance":
-                            Finance newDepartmentF = new Finance() {
-                                @Override
-                                public double getTotalSalaryBudget() {
-                                    return super.getTotalSalaryBudget();
-                                }
-                            };
+                            Finance newDepartmentF = new Finance();
                             newDepartmentF.setName(typeOfDepartment);
-                            newDepartmentF.employees = new ArrayList<>();
                             if(company.getDepartment(newDepartmentF.getName()) == null)
                                 company.add(newDepartmentF);
-                        case "HR":
-                            Department newDep = new Department() {
-                                @Override
-                                public double getTotalSalaryBudget() {
-                                    return 0;
-                                }
-                            };
-                            newDep.setName(typeOfDepartment);
-                            newDep.employees = new ArrayList<>();
-                            if(company.getDepartment(newDep.getName()) == null)
-                                company.add(newDep);
                     }
+                    */
                     company.setName((String)exper.get("company"));
-                    if(!application.getCompanies().contains(company))
+
+
+
+
+
+
+
+                    ////
+                    Company comp = null;
+                    if(application.getCompany(company.getName()) == null)
+                            application.add(company);
+
+                    comp = application.getCompany(company.getName());
+
+                    Department d = Department.DepartmentFactory.Factory(typeOfDepartment);
+                    d.setName(typeOfDepartment);
+
+                    boolean found = false;
+                    for(Department dep : comp.getDepartments()) {
+                        if(dep.getName().equals(d.getName()) == true) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if(!found)
+                        comp.add(d);
+
+                    /*
+                    if(application.getCompany(company.getName()) == null)
                         application.add(company);
                     else
                         application.getCompany(company.getName()).setDepartments(company.getDepartments());
-                    experience.setCompany(company);
+                    */
+                    experience.setCompany(comp);
                     experiences.add(experience);
                 }
+
                 employee.companyName = experiences.lastElement().getCompany().getName();
                 employee.salary = (double)((long)empl.get("salary"));
                 Consumer.Resume resume = new Consumer.Resume.ResumeBuilder(information)
                         .vectors(educations,experiences)
                         .build();
                 employee.setResume(resume);
-                application.companies.get(application.companies.size()-1).getDepartment(employee.getResume()
-                .getExperience().lastElement().getDepartment()).add(employee);
+
+                Company comp =  experiences.lastElement().getCompany();
+                String depname =  experiences.lastElement().getDepartment();
+
+                //System.out.println("\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n" + employee.getResume().getInformation().getFirstName() + " " + depname + " " + comp.getName() + " "+ comp.getDepartments().size());
+
+                for(Department dep : comp.getDepartments()) {
+                    //System.out.println(dep.getClass().toString().substring("class ".length()) + " ajungi? " + depname);
+                    if(dep.getClass().toString().substring("class ".length()).equals(depname) == true) {
+                        dep.add(employee);
+                        //System.out.println("\tfound");
+                        break;
+                    }
+                }
+                //application.companies.get(application.companies.size()-1).getDepartment(employee.getResume().getExperience().lastElement().getDepartment()).add(employee);
+                  /*
                 Job job = new Job();
                 job.setSalary((int)employee.salary);
                 job.setJobName(experiences.lastElement().getPositon());
                 job.setCompany(experiences.lastElement().getCompany());
                 if((!application.getJobsAll().contains(job)))
-                    application.jobs.add(job);
+                   application.jobs.add(job);
+                */
             }
 
             for (Object o : (JSONArray)jsonObject.get("recruiters")){
@@ -192,6 +214,13 @@ public class Test {
                 information.setPhone((String)recr.get("phone"));
                 information.setSex((String)recr.get("genre"));
                 information.setEmail((String)recr.get("email"));
+                String dateOfBirth = (String)recr.get("date_of_birth");
+                StringTokenizer stDateOfBirth = new StringTokenizer(dateOfBirth, ".");
+                Calendar stBDay = new Calendar();
+                stBDay.setDay(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setMonth(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setYear(Integer.parseInt(stDateOfBirth.nextToken()));
+                information.setBirthday(stBDay);
                 ArrayList<Language> languages = new ArrayList<>();
                 ArrayList<String> languagesName = new ArrayList<>();
                 int countLanguages = 0;
@@ -259,12 +288,21 @@ public class Test {
                     //ArrayList<Recruiter> recruiters = new ArrayList<>();
                     //company.setRecruiters(recruiters);
                     company.setName((String)exper.get("company"));
-                    if(!application.getCompanies().contains(company))
+                    if(application.getCompany(company.getName()) == null)
                         application.add(company);
                     //else
-                    //    application.getCompanies().get(application.getCompanies().indexOf(company)).setRecruiters(recruiters);
-                    experience.setCompany(company);
+
+
+
+                    Company comp = null;
+                    if(application.getCompany(company.getName()) == null)
+                            application.add(company);
+
+                    comp = application.getCompany(company.getName());
+                    experience.setCompany(comp);
                     experiences.add(experience);
+
+
                 }
                 recruiter.companyName = experiences.lastElement().getCompany().getName();
                 recruiter.salary = (double)((long)recr.get("salary"));
@@ -274,19 +312,23 @@ public class Test {
                 recruiter.setResume(resume);
                 // se adauga recruiterul?
                 experiences.lastElement().getCompany().add(recruiter);
+
+
+               /*
                 if (experiences.lastElement().getCompany().contains(recruiter)){
                     System.out.println("da, contine recriuter - ul compania respectiva");
                 }
+                */
                 // de ce nu adauga recruiter aici???
-                Job job = new Job();
-                job.setSalary((int)recruiter.salary);
-                job.setJobName(experiences.lastElement().getPositon());
-                job.setCompany(experiences.lastElement().getCompany());
-                if((!application.getJobsAll().contains(job))){
-                    application.jobs.add(job);
-                    System.out.println("da, am adaugat job - ul");
-
-                }
+//                Job job = new Job();
+//                job.setSalary((int)recruiter.salary);
+//                job.setJobName(experiences.lastElement().getPositon());
+//                job.setCompany(experiences.lastElement().getCompany());
+//                if((!application.getJobsAll().contains(job))){
+//                    application.jobs.add(job);
+//                    //System.out.println("da, am adaugat job - ul");
+//
+//                  }
             }
 
             for (Object o : (JSONArray)jsonObject.get("users")){
@@ -301,6 +343,13 @@ public class Test {
                 information.setLastName(stName.nextToken());
                 information.setPhone((String)userJson.get("phone"));
                 information.setSex((String)userJson.get("genre"));
+                String dateOfBirth = (String)userJson.get("date_of_birth");
+                StringTokenizer stDateOfBirth = new StringTokenizer(dateOfBirth, ".");
+                Calendar stBDay = new Calendar();
+                stBDay.setDay(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setMonth(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setYear(Integer.parseInt(stDateOfBirth.nextToken()));
+                information.setBirthday(stBDay);
                 information.setEmail((String)userJson.get("email"));
                 ArrayList<Language> languages = new ArrayList<>();
                 ArrayList<String> languagesName = new ArrayList<>();
@@ -366,7 +415,7 @@ public class Test {
                     Company company = new Company();
 
                     company.setName((String)exper.get("company"));
-                    if(!application.getCompanies().contains(company))
+                    if(application.getCompany(company.getName()) == null)
                         application.add(company);
                     experience.setCompany(company);
                     experiences.add(experience);
@@ -382,11 +431,12 @@ public class Test {
                     intCompanies.add(c);
                 }
                 user.setInterestedCompanies(intCompanies);
-                Job job = new Job();
-                job.setJobName(experiences.lastElement().getPositon());
-                job.setCompany(experiences.lastElement().getCompany());
-                if((!application.getJobsAll().contains(job)))
-                    application.jobs.add(job);
+//                Job job = new Job();
+//                job.setJobName(experiences.lastElement().getPositon());
+//                job.setCompany(experiences.lastElement().getCompany());
+//                if((!application.getJobsAll().contains(job)))
+//                    application.jobs.add(job);
+//
                 application.users.add(user);
             }
 
@@ -403,6 +453,13 @@ public class Test {
                 information.setPhone((String)manag.get("phone"));
                 information.setSex((String)manag.get("genre"));
                 information.setEmail((String)manag.get("email"));
+                String dateOfBirth = (String)manag.get("date_of_birth");
+                StringTokenizer stDateOfBirth = new StringTokenizer(dateOfBirth, ".");
+                Calendar stBDay = new Calendar();
+                stBDay.setDay(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setMonth(Integer.parseInt(stDateOfBirth.nextToken()));
+                stBDay.setYear(Integer.parseInt(stDateOfBirth.nextToken()));
+                information.setBirthday(stBDay);
                 ArrayList<Language> languages = new ArrayList<>();
                 ArrayList<String> languagesName = new ArrayList<>();
                 int countLanguages = 0;
@@ -467,7 +524,7 @@ public class Test {
                     Company company = new Company();
 
                     company.setName((String)exper.get("company"));
-                    if(!application.getCompanies().contains(company))
+                    if(application.getCompany(company.getName()) == null)
                         application.add(company);
                     experience.setCompany(company);
                     experiences.add(experience);
@@ -479,12 +536,12 @@ public class Test {
                         .build();
                 manager.setResume(resume);
                 experiences.lastElement().getCompany().setManager(manager);
-                Job job = new Job();
-                job.setSalary((int)manager.salary);
-                job.setJobName(experiences.lastElement().getPositon());
-                job.setCompany(experiences.lastElement().getCompany());
-                if((!application.getJobsAll().contains(job)))
-                    application.jobs.add(job);
+//                Job job = new Job();
+//                job.setSalary((int)manager.salary);
+//                job.setJobName(experiences.lastElement().getPositon());
+//                job.setCompany(experiences.lastElement().getCompany());
+//                if((!application.getJobsAll().contains(job)))
+//                    application.jobs.add(job);
             }
 
             final String test = new String("src\\Acquaintances.txt");
@@ -649,17 +706,22 @@ public class Test {
                                         } else
                                             department.findJob(jobName).setAvailable(false);
                                         department.findJob(jobName).setNumberOfEmployees(Integer.parseInt(stJobInfo.nextToken()));
+
                                         Job.Constraint gradYear = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
-                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        Integer.parseInt(stJobInfo.nextToken()));
                                         department.findJob(jobName).setGraduation(gradYear);
+
                                         Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
-                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        Integer.parseInt(stJobInfo.nextToken()));
                                         department.findJob(jobName).setExperience(experience);
+
                                         Job.Constraint average = new Job.Constraint(Double.parseDouble(stJobInfo.nextToken()),
-                                                Double.parseDouble(stJobInfo.nextToken()));
+                                        Double.parseDouble(stJobInfo.nextToken()));
                                         department.findJob(jobName).setAcademicAverage(average);
-                                    }
-                                    else{
+
+
+
+                                    } else {
                                         Job newJob = new Job();
                                         newJob.setJobName(jobName);
                                         int available = Integer.parseInt(stJobInfo.nextToken());
@@ -689,7 +751,16 @@ public class Test {
                 }
             }
 
+            /*
+            for (Company c : application.getCompanies()){
+                System.out.println(c.getName());
+                for(Department d : c.getDepartments())
+                    System.out.println("\t" + d.getClass());
+            }*/
             // userii care aplica
+
+            System.out.println(application.findConsumer("Jonie", "Phillip"));
+
             System.out.println("nu exista recruiteri aici in companie");
             ArrayList<Job> availableJobs = new ArrayList<>();
             for (User user : application.users){
@@ -700,10 +771,16 @@ public class Test {
                 }
                 availableJobs = application.getJobs(companiesName);
                 for (Job job : availableJobs){
+                /*
                     for ( Recruiter r : job.getCompany().getRecruiters()){
-                        System.out.println(" avem recruiteri");  //nu n avem
+//                        if(job.getCompany().getRecruiters().contains(r)){
+//                            System.out.println("da, contine recruiter-ul din functia asta");
+//
+//                        }
+                        //System.out.println(" avem recruiteri");  //nu n avem
                         // de ce nu avem recruiteri in companii?!?!?!?
                     }
+                    */
                     //TODO: ce naiba are functia de apply???
                     job.apply(user);
                     job.getCompany().getManager().process(job);
@@ -713,13 +790,16 @@ public class Test {
                 }
             }
 
+
         }  catch (IOException | ParseException e){
             e.printStackTrace();
         }
     }
     //TODO: fisiser pentru aplicarea userilor
 
+
+
     public static void main(String[] args) throws Exception {
-        Test test = new Test("consumers.json");
+        Test test = new Test("src\\consumers.json");
     }
 }

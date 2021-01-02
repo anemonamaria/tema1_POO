@@ -1,4 +1,4 @@
-public abstract class Management extends Department{
+public class Management extends Department{
     public double getTotalSalaryBudget(){
         Double salaries = (double)0;
         for(Employee e : this.employees){

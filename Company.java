@@ -41,7 +41,8 @@ public class Company implements Subject{
 
     public void setDepartments(ArrayList<Department> departments) {
         if (departments == null) return;
-        this.departments = departments;
+        this.departments.addAll(departments);
+        //this.departments = departments;
     }
 
     public void setRecruiters(ArrayList<Recruiter> recruiters) {
@@ -112,7 +113,8 @@ public class Company implements Subject{
 
     public Department getDepartment(String departmentName){
         for(Department d : departments){
-            if(d.getName() == departmentName){
+            System.out.println(d.getClass() + " numele companiei " + getName());
+            if(d.getName().equals(departmentName)){
                 return d;
             }
         }
@@ -134,16 +136,15 @@ public class Company implements Subject{
     }
 
     // Determinarea recruiter-ului potrivit pentru un utilizator;
-    public Recruiter geRecruiter(User user){
-        System.out.print("da?");
+    public Recruiter getRecruiter(User user){
 
         //TODO: verifica getDegreeInFriendship
         ArrayList<Integer> recruiterScores = new ArrayList<>();
-        for (Recruiter r : recruiters){
-            System.out.println("avem recruiteri?");
+        //System.out.println(this.recruiters.get(0).getResume().getInformation().getFirstName());   Application.getInstance().getCompany(this.getName()).getRecruiters()
+        for (Recruiter r : recruiters){   //TODO de ce nu am recruiteri
             //TODO: de ce nu intri aici?
             recruiterScores.add(r.getDegreeInFriendship(user));
-            System.out.println(r.getDegreeInFriendship(user));
+            System.out.println("tu esti 0 0 ? "+ r.getDegreeInFriendship(user));
         }
         int max = 0, index = 0;
         for(Integer i : recruiterScores){

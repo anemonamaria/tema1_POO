@@ -56,7 +56,6 @@ public abstract class Consumer {
         //TODO: e buna?
         int contoar = 0;
         ArrayList<Consumer> visited  = new ArrayList<>();
-        System.out.println("helllo");
         for(Consumer c : this.aquaintance){
             System.out.println("esti aici?");
             visited.add(c);

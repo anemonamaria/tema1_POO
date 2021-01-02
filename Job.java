@@ -5,9 +5,9 @@ public class Job {
     private String jobName;
     private Company company;
     private Boolean available;
-    private Constraint graduationYear;
-    private Constraint experience;
-    private Constraint academicAverage;
+    private Constraint<Integer> graduationYear;
+    private Constraint<Integer> experience;
+    private Constraint<Double> academicAverage;
     private ArrayList<User> applicants;
     private int numberOfEmployees;
     private int salary;
@@ -93,11 +93,10 @@ public class Job {
     // O metodă prin care un utilizator aplică la un job în companie
     public void apply(User user){
         // AICI INTRA O DATA
-        //TODO:  de ce are problema aici?
-        Recruiter recruiter = this.company.geRecruiter(user);   /// DE MODFICAT FUNCTIA ASTA PT GRAF, TREBUIE MUTATA IN CLASA ASTA
+        //TODO:  de ce are problema aici? DC TRIMITE O SINGURA CERERE?
+        System.out.println(" compania din apply " + this.getCompany().getName());
+        Recruiter recruiter = this.company.getRecruiter(user);   /// DE MODFICAT FUNCTIA ASTA PT GRAF, TREBUIE MUTATA IN CLASA ASTA
         int scor = recruiter.evaluate(this, user);
-        Recruiter.Request<Job, Consumer> newRequest = new Recruiter.Request<Job, Consumer>(this, user, recruiter, (double)scor);
-        Manager.requests.add(newRequest);
 
         // Observer pattern
         this.company.addObserver(user);
@@ -109,14 +108,18 @@ public class Job {
     //ca parametru
     public boolean meetsRequirments(User user){
         int aux = 1;
-        if (!this.academicAverage.verifyX(user.meanGPA().intValue())){
-            aux = 0;
-        }
+
         if(!this.experience.verifyX(user.getTotalYearsExperience())){
             aux = 0;
         }
-        if(!this.graduationYear.verifyX(user.getResume().getEducation().lastElement().getEndDate().getYear())){ ///????
-            aux = 0;
+        if (!this.academicAverage.verifyX(user.meanGPA())){
+                    aux = 0;
+        }
+        if(user.getResume().getEducation().lastElement().getEndDate() != null){
+            // TODO: de luat anul facultatii nu ultimul an din educatie, pe ei ii intereseaza licenta la job
+            if (!this.graduationYear.verifyX(user.getResume().getEducation().lastElement().getEndDate().getYear())) { ///????
+                aux = 0;
+            }
         }
         if(aux == 1) return true;
         else return false;
@@ -144,10 +147,10 @@ public class Job {
 
         // verificam daca o valoare se incadreaza in constrangerile clasei
         public boolean verifyX(V x){
-            if (this.inferior.compareTo(x) > 0 && this.superior.compareTo(x) < 0){
-                return true;
-            }
-            return false;
+            boolean cond1 = false, cond2 = false;
+            if (inferior == null ||  this.inferior.compareTo(x) > 0) return cond1 = true;
+            if (inferior == null ||  this.superior.compareTo(x) < 0) return cond2 = true;
+            return cond1 && cond2;
         }
     }
 }

@@ -4,6 +4,11 @@ public class User extends Consumer implements Observer{
     private ArrayList<Notification> notifications;
     private ArrayList<Company> interestedCompanies;
 
+    public User(){
+        notifications = new ArrayList<>();
+        interestedCompanies = new ArrayList<>();
+    }
+
     public Employee convert(){ // ???
         Employee newEmployee = new Employee();
         newEmployee.setResume(this.getResume());
