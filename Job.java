@@ -94,7 +94,6 @@ public class Job {
     public void apply(User user){
         // AICI INTRA O DATA
         //TODO:  de ce are problema aici? DC TRIMITE O SINGURA CERERE?
-        System.out.println(" compania din apply " + this.getCompany().getName());
         Recruiter recruiter = this.company.getRecruiter(user);   /// DE MODFICAT FUNCTIA ASTA PT GRAF, TREBUIE MUTATA IN CLASA ASTA
         int scor = recruiter.evaluate(this, user);
 

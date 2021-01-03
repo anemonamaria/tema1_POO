@@ -104,42 +104,7 @@ public class Test {
                     experience.setDepartment((String)exper.get("departament"));
                     Company company = new Company();
                     String typeOfDepartment = (String)exper.get("departament");
-
-
-
-                    /*
-                    switch(typeOfDepartment){
-                        case "IT":
-                            IT newDepartment = new IT();
-                            newDepartment.setName(typeOfDepartment);
-                            if(company.getDepartment(newDepartment.getName()) == null)
-                                company.add(newDepartment);
-                        case "Management":
-                            Management newDepartmentM = new Management();
-                            newDepartmentM.setName(typeOfDepartment);
-                            if(company.getDepartment(newDepartmentM.getName()) == null)//application.getCompany((String)exper.get("company")).getDepartment(newDepartmentM.getName()) == null
-                                company.add(newDepartmentM);
-                        case "Marketing":
-                            Marketing newDepartmentMarketing = new Marketing() ;
-                            newDepartmentMarketing.setName(typeOfDepartment);
-                            if(company.getDepartment(newDepartmentMarketing.getName()) == null)
-                                company.add(newDepartmentMarketing);
-                        case "Finance":
-                            Finance newDepartmentF = new Finance();
-                            newDepartmentF.setName(typeOfDepartment);
-                            if(company.getDepartment(newDepartmentF.getName()) == null)
-                                company.add(newDepartmentF);
-                    }
-                    */
                     company.setName((String)exper.get("company"));
-
-
-
-
-
-
-
-                    ////
                     Company comp = null;
                     if(application.getCompany(company.getName()) == null)
                             application.add(company);
@@ -156,16 +121,8 @@ public class Test {
                             break;
                         }
                     }
-
                     if(!found)
                         comp.add(d);
-
-                    /*
-                    if(application.getCompany(company.getName()) == null)
-                        application.add(company);
-                    else
-                        application.getCompany(company.getName()).setDepartments(company.getDepartments());
-                    */
                     experience.setCompany(comp);
                     experiences.add(experience);
                 }
@@ -179,26 +136,12 @@ public class Test {
 
                 Company comp =  experiences.lastElement().getCompany();
                 String depname =  experiences.lastElement().getDepartment();
-
-                //System.out.println("\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n" + employee.getResume().getInformation().getFirstName() + " " + depname + " " + comp.getName() + " "+ comp.getDepartments().size());
-
                 for(Department dep : comp.getDepartments()) {
-                    //System.out.println(dep.getClass().toString().substring("class ".length()) + " ajungi? " + depname);
                     if(dep.getClass().toString().substring("class ".length()).equals(depname) == true) {
                         dep.add(employee);
-                        //System.out.println("\tfound");
                         break;
                     }
                 }
-                //application.companies.get(application.companies.size()-1).getDepartment(employee.getResume().getExperience().lastElement().getDepartment()).add(employee);
-                  /*
-                Job job = new Job();
-                job.setSalary((int)employee.salary);
-                job.setJobName(experiences.lastElement().getPositon());
-                job.setCompany(experiences.lastElement().getCompany());
-                if((!application.getJobsAll().contains(job)))
-                   application.jobs.add(job);
-                */
             }
 
             for (Object o : (JSONArray)jsonObject.get("recruiters")){
@@ -283,26 +226,15 @@ public class Test {
                     experience.setEndDate(endD);
                     experience.setPositon((String)exper.get("position"));
                     Company company = new Company();
-                    // recruiters list
-                    // ce naiba ai????
-                    //ArrayList<Recruiter> recruiters = new ArrayList<>();
-                    //company.setRecruiters(recruiters);
                     company.setName((String)exper.get("company"));
                     if(application.getCompany(company.getName()) == null)
                         application.add(company);
-                    //else
-
-
-
                     Company comp = null;
                     if(application.getCompany(company.getName()) == null)
                             application.add(company);
-
                     comp = application.getCompany(company.getName());
                     experience.setCompany(comp);
                     experiences.add(experience);
-
-
                 }
                 recruiter.companyName = experiences.lastElement().getCompany().getName();
                 recruiter.salary = (double)((long)recr.get("salary"));
@@ -312,23 +244,6 @@ public class Test {
                 recruiter.setResume(resume);
                 // se adauga recruiterul?
                 experiences.lastElement().getCompany().add(recruiter);
-
-
-               /*
-                if (experiences.lastElement().getCompany().contains(recruiter)){
-                    System.out.println("da, contine recriuter - ul compania respectiva");
-                }
-                */
-                // de ce nu adauga recruiter aici???
-//                Job job = new Job();
-//                job.setSalary((int)recruiter.salary);
-//                job.setJobName(experiences.lastElement().getPositon());
-//                job.setCompany(experiences.lastElement().getCompany());
-//                if((!application.getJobsAll().contains(job))){
-//                    application.jobs.add(job);
-//                    //System.out.println("da, am adaugat job - ul");
-//
-//                  }
             }
 
             for (Object o : (JSONArray)jsonObject.get("users")){
@@ -431,12 +346,6 @@ public class Test {
                     intCompanies.add(c);
                 }
                 user.setInterestedCompanies(intCompanies);
-//                Job job = new Job();
-//                job.setJobName(experiences.lastElement().getPositon());
-//                job.setCompany(experiences.lastElement().getCompany());
-//                if((!application.getJobsAll().contains(job)))
-//                    application.jobs.add(job);
-//
                 application.users.add(user);
             }
 
@@ -536,12 +445,6 @@ public class Test {
                         .build();
                 manager.setResume(resume);
                 experiences.lastElement().getCompany().setManager(manager);
-//                Job job = new Job();
-//                job.setSalary((int)manager.salary);
-//                job.setJobName(experiences.lastElement().getPositon());
-//                job.setCompany(experiences.lastElement().getCompany());
-//                if((!application.getJobsAll().contains(job)))
-//                    application.jobs.add(job);
             }
 
             final String test = new String("src\\Acquaintances.txt");
@@ -678,7 +581,6 @@ public class Test {
                             }
                         }
                         break;
-                    //testFile.readLine();
                 }
             }
 
@@ -751,17 +653,6 @@ public class Test {
                 }
             }
 
-            /*
-            for (Company c : application.getCompanies()){
-                System.out.println(c.getName());
-                for(Department d : c.getDepartments())
-                    System.out.println("\t" + d.getClass());
-            }*/
-            // userii care aplica
-
-            System.out.println(application.findConsumer("Jonie", "Phillip"));
-
-            System.out.println("nu exista recruiteri aici in companie");
             ArrayList<Job> availableJobs = new ArrayList<>();
             for (User user : application.users){
 
@@ -771,24 +662,24 @@ public class Test {
                 }
                 availableJobs = application.getJobs(companiesName);
                 for (Job job : availableJobs){
-                /*
-                    for ( Recruiter r : job.getCompany().getRecruiters()){
-//                        if(job.getCompany().getRecruiters().contains(r)){
-//                            System.out.println("da, contine recruiter-ul din functia asta");
-//
-//                        }
-                        //System.out.println(" avem recruiteri");  //nu n avem
-                        // de ce nu avem recruiteri in companii?!?!?!?
-                    }
-                    */
-                    //TODO: ce naiba are functia de apply???
+
+                    //TODO: ce naiba are functia de process???
                     job.apply(user);
-                    job.getCompany().getManager().process(job);
+                   // job.getCompany().getManager().process(job);
                     // is good???
+
                     //TODO: verifica daca astia aplica la job
                     //TODO: verifica request-urile daca sunt trimise
                 }
             }
+            //  da, retine lista de cunostinte a fiecarui user
+//            System.out.println("\n\tlista de cunostinte a userilor");
+//            for(User u : application.users){
+//                System.out.println("user ul " + u.getResume().getInformation().getFirstName());
+//                for(Consumer c : u.getAquaintance()){
+//                    System.out.println("\t\t\t cunostinta: " + c.getResume().getInformation().getFirstName());
+//                }
+//            }
 
 
         }  catch (IOException | ParseException e){
@@ -801,5 +692,6 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         Test test = new Test("src\\consumers.json");
-    }
+        new AdminPage("Admin Page");
+   }
 }

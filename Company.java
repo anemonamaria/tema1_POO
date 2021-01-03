@@ -143,8 +143,9 @@ public class Company implements Subject{
         //System.out.println(this.recruiters.get(0).getResume().getInformation().getFirstName());   Application.getInstance().getCompany(this.getName()).getRecruiters()
         for (Recruiter r : recruiters){   //TODO de ce nu am recruiteri
             //TODO: de ce nu intri aici?
+            // todo de ce nu exista niciun grad de prietenie?
             recruiterScores.add(r.getDegreeInFriendship(user));
-            System.out.println("tu esti 0 0 ? "+ r.getDegreeInFriendship(user));
+           // System.out.println("tu esti 0 0 ? "+ r.getDegreeInFriendship(user));
         }
         int max = 0, index = 0;
         for(Integer i : recruiterScores){

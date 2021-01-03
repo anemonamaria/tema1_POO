@@ -42,7 +42,7 @@ public class Manager extends Employee{
                     // aleg utilizatorul cu cel mai mare scor
                 }
             }
-            if(aux.getValue1()!= null){
+            if (aux.getValue1() != null) {
                 if (!Application.users.contains(aux.getValue1())) {
                     sortedList.add(aux);
                     // il adaug in lista sortata descrescator daca nu este angajat intre timp
@@ -79,7 +79,7 @@ public class Manager extends Employee{
             }
         }
         for (Recruiter.Request<Job, Consumer> req : requests){
-            if (req.getKey() == job){
+            if (req.getKey().getJobName().equals(job.getJobName())){
                 requests.remove(req);
                 //sterg din colectia de requests request-urile pentru job
             }
