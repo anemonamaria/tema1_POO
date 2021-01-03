@@ -104,7 +104,7 @@ public abstract class Consumer {
     public int getTotalYearsExperience(){
         Integer yearsOfExperience = 0;
         if (this.resume.experience.firstElement().getStartDate().getYear() == this.resume.experience.lastElement().getEndDate().getYear()){
-            yearsOfExperience = 1;
+            yearsOfExperience = 1;  //todo repara get year ca da null
         } else {
             yearsOfExperience = this.resume.experience.lastElement().getEndDate().getYear() - this.resume.experience.firstElement().getStartDate().getYear();
         }

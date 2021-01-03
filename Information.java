@@ -58,6 +58,26 @@ public class Information {
     public String getLastName() {
         return lastName;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Calendar getBirthday() {
+        return birthday;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public ArrayList<Language> getKnownLanguages() {
+        return knownLanguages;
+    }
 }
 
 class Language{
@@ -72,6 +92,10 @@ class Language{
     public Language(String name, String level){
         this.name = name;
         this.level = level;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getLevel() {

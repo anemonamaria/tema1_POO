@@ -681,6 +681,15 @@ public class Test {
 //                }
 //            }
 
+            for(Company c : Application.companies){
+                for(Department d : c.getDepartments()){
+                    for (Employee e : d.getEmployees()){
+                        System.out.println("compania  "+  c.getName() + " cu deprt " + d.getName() + " cu angajatul " + e.getResume().getInformation().getFirstName());
+
+                    }
+                }
+            }
+
 
         }  catch (IOException | ParseException e){
             e.printStackTrace();
@@ -692,6 +701,7 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         Test test = new Test("src\\consumers.json");
-        new AdminPage("Admin Page");
+        //new AdminPage("Admin Page");
+        new ProfilePage("Profile Page");
    }
 }

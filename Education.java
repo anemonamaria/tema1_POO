@@ -43,6 +43,14 @@ public class Education implements Comparable {
         return endDate;
     }
 
+    public String getLevel() {
+        return level;
+    }
+
+    public String getInstitution() {
+        return institution;
+    }
+
     public Calendar getStartDate() {
         return startDate;
     }
