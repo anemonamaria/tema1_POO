@@ -444,7 +444,11 @@ public class Test {
                         .vectors(educations,experiences)
                         .build();
                 manager.setResume(resume);
+                System.out.println("company name for manager " + manager.getResume().getInformation().getFirstName());
+                System.out.println("aJuNgI?");
                 experiences.lastElement().getCompany().setManager(manager);
+                System.out.println("din companie " + experiences.lastElement().getCompany().getManager().getResume().getInformation().getFirstName());
+                //todo repara manager-ul ca nu e retinut bine
             }
 
             final String test = new String("src\\Acquaintances.txt");
@@ -463,7 +467,6 @@ public class Test {
                             String firstName = stEmployeeInfo.nextToken();
                             String lastName = stEmployeeInfo.nextToken();
                             int numberOfAcquaintanes = Integer.parseInt(stEmployeeInfo.nextToken());
-                          //  System.out.println("firstName " +firstName + " lastName " + lastName + numberOfAcquaintanes);
 
                             if (numberOfAcquaintanes > 0){
                                 for(Company c : application.getCompanies()){
@@ -478,20 +481,23 @@ public class Test {
                                                     for (Company co : application.getCompanies()) {
                                                         for (Department de : co.getDepartments()) {
                                                             if (de.findEmployee(firstNameAcq, lastNameAcq) != null) {
-                                                                d.findEmployee(firstName, lastName).add(de.findEmployee(firstNameAcq, lastNameAcq));
+                                                                d.findEmployee(firstName, lastName).add(de
+                                                                        .findEmployee(firstNameAcq, lastNameAcq));
                                                             }
                                                             //adaugam la employee-ul gasit prietenul employee
                                                         }
                                                     }
                                                     // daca are prieteni user
                                                     if (application.findUser(firstNameAcq, lastNameAcq) != null) {
-                                                        d.findEmployee(firstName, lastName).add(application.findUser(firstNameAcq, lastNameAcq));
+                                                        d.findEmployee(firstName, lastName).add(application.findUser
+                                                                (firstNameAcq, lastNameAcq));
                                                         // adaugam la employee prietenul user
                                                     }
                                                     //daca are prieteni recruiteri
                                                     for (Company comp : application.getCompanies()) {
                                                         if (comp.findRecruiter(firstNameAcq, lastNameAcq) != null) {
-                                                            d.findEmployee(firstName, lastName).add(comp.findRecruiter(firstNameAcq, lastNameAcq));
+                                                            d.findEmployee(firstName, lastName).add(comp.findRecruiter
+                                                                    (firstNameAcq, lastNameAcq));
                                                         }
                                                         // adaugam la employee ul gasit prietenul recruiter
                                                     }
@@ -521,20 +527,23 @@ public class Test {
                                         for(Company co : application.getCompanies()){
                                             for (Department de : co.getDepartments()){
                                                 if(de.findEmployee(firstNameAcq,lastNameAcq) != null){
-                                                    c.findRecruiter(firstName,lastName).add(de.findEmployee(firstNameAcq,lastNameAcq));
+                                                    c.findRecruiter(firstName,lastName).add(de.findEmployee(firstNameAcq
+                                                            ,lastNameAcq));
                                                 }
                                                 //adaugam la recruiter-ul gasit prietenul employee
                                             }
                                         }
                                         // daca are prieteni user
                                         if (application.findUser(firstNameAcq,lastNameAcq) != null){
-                                            c.findRecruiter(firstName,lastName).add(application.findUser(firstNameAcq,lastNameAcq));
+                                            c.findRecruiter(firstName,lastName).add(application.findUser(firstNameAcq
+                                                    ,lastNameAcq));
                                             // adaugam la recruiter-ul gasit prietenul user
                                         }
                                         //daca are prieteni recruiteri
                                         for(Company comp : application.getCompanies()){
                                             if(comp.findRecruiter(firstNameAcq,lastNameAcq) != null){
-                                                c.findRecruiter(firstName,lastName).add(comp.findRecruiter(firstNameAcq,lastNameAcq));
+                                                c.findRecruiter(firstName,lastName).add(comp.findRecruiter(firstNameAcq
+                                                        ,lastNameAcq));
                                             }
                                             // adaugam la recruiter ul gasit prietenul recruiter
                                         }
@@ -560,20 +569,23 @@ public class Test {
                                     for(Company co : application.getCompanies()){
                                         for (Department de : co.getDepartments()){
                                             if(de.findEmployee(firstNameAcq,lastNameAcq) != null){
-                                                application.findUser(firstName,lastName).add(de.findEmployee(firstNameAcq,lastNameAcq));
+                                                application.findUser(firstName,lastName).add(de.findEmployee
+                                                        (firstNameAcq,lastNameAcq));
                                             }
                                             //adaugam la user-ul gasit prietenul employee
                                         }
                                     }
                                     // daca are prieteni user
                                     if (application.findUser(firstNameAcq,lastNameAcq) != null){
-                                        application.findUser(firstName,lastName).add(application.findUser(firstNameAcq,lastNameAcq));
+                                        application.findUser(firstName,lastName).add(application.findUser(firstNameAcq
+                                                ,lastNameAcq));
                                         // adaugam la recruiter-ul gasit prietenul user
                                     }
                                     //daca are prieteni recruiteri
                                     for(Company comp : application.getCompanies()){
                                         if(comp.findRecruiter(firstNameAcq,lastNameAcq) != null){
-                                            application.findUser(firstName,lastName).add(comp.findRecruiter(firstNameAcq,lastNameAcq));
+                                            application.findUser(firstName,lastName).add(comp.findRecruiter(firstNameAcq
+                                                    ,lastNameAcq));
                                         }
                                         // adaugam la recruiter ul gasit prietenul recruiter
                                     }
@@ -607,17 +619,21 @@ public class Test {
                                             department.findJob(jobName).setAvailable(true);
                                         } else
                                             department.findJob(jobName).setAvailable(false);
-                                        department.findJob(jobName).setNumberOfEmployees(Integer.parseInt(stJobInfo.nextToken()));
+                                        department.findJob(jobName).setNumberOfEmployees(Integer.parseInt(stJobInfo
+                                                .nextToken()));
 
-                                        Job.Constraint gradYear = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
+                                        Job.Constraint gradYear = new Job.Constraint(Integer.parseInt(stJobInfo
+                                                .nextToken()),
                                         Integer.parseInt(stJobInfo.nextToken()));
                                         department.findJob(jobName).setGraduation(gradYear);
 
-                                        Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
+                                        Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJobInfo
+                                                .nextToken()),
                                         Integer.parseInt(stJobInfo.nextToken()));
                                         department.findJob(jobName).setExperience(experience);
 
-                                        Job.Constraint average = new Job.Constraint(Double.parseDouble(stJobInfo.nextToken()),
+                                        Job.Constraint average = new Job.Constraint(Double.parseDouble(stJobInfo
+                                                .nextToken()),
                                         Double.parseDouble(stJobInfo.nextToken()));
                                         department.findJob(jobName).setAcademicAverage(average);
 
@@ -633,14 +649,14 @@ public class Test {
                                             newJob.setAvailable(false);
                                         int nrOfEmployees = Integer.parseInt(stJobInfo.nextToken());
                                         newJob.setNumberOfEmployees(nrOfEmployees);
-                                        Job.Constraint gradYear = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
-                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        Job.Constraint gradYear = new Job.Constraint(Integer.parseInt(stJobInfo
+                                                .nextToken()), Integer.parseInt(stJobInfo.nextToken()));
                                         newJob.setGraduation(gradYear);
-                                        Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJobInfo.nextToken()),
-                                                Integer.parseInt(stJobInfo.nextToken()));
+                                        Job.Constraint experience = new Job.Constraint(Integer.parseInt(stJobInfo
+                                                .nextToken()), Integer.parseInt(stJobInfo.nextToken()));
                                         newJob.setExperience(experience);
-                                        Job.Constraint average = new Job.Constraint(Double.parseDouble(stJobInfo.nextToken()),
-                                                Double.parseDouble(stJobInfo.nextToken()));
+                                        Job.Constraint average = new Job.Constraint(Double.parseDouble(stJobInfo
+                                                .nextToken()), Double.parseDouble(stJobInfo.nextToken()));
                                         newJob.setAcademicAverage(average);
                                         newJob.setCompany(company);
                                         department.add(newJob);
@@ -684,14 +700,24 @@ public class Test {
             for(Company c : Application.companies){
                 for(Department d : c.getDepartments()){
                     for (Employee e : d.getEmployees()){
-                        System.out.println("compania  "+  c.getName() + " cu deprt " + d.getName() + " cu angajatul " + e.getResume().getInformation().getFirstName());
+                        System.out.println("compania  "+  c.getName() + " cu deprt " + d.getName() + " cu angajatul " + e.getResume().getInformation().getFirstName() + " last name " + e.getResume().getInformation().getLastName());
 
                     }
                 }
             }
 
+            for(User u : Application.getUsers()){
+                System.out.println("User-ul cu first name " + u.getResume().getInformation().getFirstName() + " " + u.getResume().getInformation().getLastName());
+            }
+// todo  sterge toate system out urile la final
 
-        }  catch (IOException | ParseException e){
+            for(Company c : Application.getInstance().getCompanies()){
+                System.out.println("manager in companie " + c.getManager().getResume().getInformation().getFirstName());
+                //todo wtf?????????????????????????
+            }
+
+
+            }  catch (IOException | ParseException e){
             e.printStackTrace();
         }
     }
@@ -701,7 +727,8 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         Test test = new Test("src\\consumers.json");
-        //new AdminPage("Admin Page");
-        new ProfilePage("Profile Page");
+        // new AdminPage("Admin Page");
+        // new ProfilePage("Profile Page");
+        new ManagerPage("Manager Page");
    }
 }
