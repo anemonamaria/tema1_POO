@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.StringTokenizer;
 import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.*;
 
@@ -12,8 +13,6 @@ public class ManagerPage extends JFrame{
         JPanel firstPage = new JPanel();
         AtomicReference<JPanel> managerPanel = new AtomicReference<>(new JPanel());
 
-        JButton acceptButton = new JButton("Accept request");
-        JButton declineButton = new JButton("Decline request");
 
         JTextField firstName = new JTextField(20);
         JTextField lastName = new JTextField(20);
@@ -42,13 +41,99 @@ public class ManagerPage extends JFrame{
                 System.out.println(firstName.getText() + " " + lastName.getText());
                 Company foundComp = null;
                 for(Company c : Application.getInstance().getCompanies()){
-                    if(c.getManager().getResume().getInformation().getFirstName().equals(firstName.getText()) &&
-                            c.getManager().getResume().getInformation().getLastName().equals(lastName.getText())){
-                        foundComp = c;
-                        break;
+                    if(c.getManager() != null){
+                        if (c.getManager().getResume().getInformation().getFirstName().equals(firstName.getText()) &&
+                                c.getManager().getResume().getInformation().getLastName().equals(lastName.getText())) {
+                            foundComp = c;
+                            break;
+                        }
                     }
                 }
                 if(foundComp != null){
+                    JButton acceptButton = new JButton("Accept request");
+                    JButton declineButton = new JButton("Decline request");
+                    int numberOfRequests  = foundComp.getManager().requests.size();
+
+                    if(numberOfRequests != 0) {
+                        String requestData[] = new String[numberOfRequests + 1];
+                        requestData[0] = "JOB | USER | RECRUITER | SCORE";
+                        int l = 1;
+
+                        for(Recruiter.Request<Job,Consumer> req : foundComp.getManager().requests){
+                            requestData[l] = req.getKey().getJobName() + " | " + req.getValue1().getResume()
+                                    .getInformation().getFirstName() + " " + req.getValue1().getResume()
+                                    .getInformation().getLastName() + " | " + req.getValue2().getResume()
+                                    .getInformation().getFirstName() + " " + req.getValue2().getResume()
+                                    .getInformation().getLastName() + " | " + req.getScore();
+                            System.out.println("da");
+                        }
+
+                        JList<String> requests = new JList<>(requestData);
+                        JScrollPane sPaneReq = new JScrollPane(requests);
+                        managerPanel.get().add(sPaneReq);
+                        acceptButton.setBackground(new Color(0,0,204));
+                        acceptButton.setForeground(Color.WHITE);
+                        declineButton.setForeground(Color.WHITE);
+                        declineButton.setBackground(new Color(255,51,51));
+                        managerPanel.get().add(acceptButton);
+                        managerPanel.get().add(declineButton);
+                        managerPanel.get().setSize(300,400);
+                        managerPanel.get().setVisible(true);
+                        managerPanel.get().setBackground(new Color(153,204,255));
+                        firstPage.setVisible(false);
+                        add(managerPanel.get());
+                        revalidate();
+
+                        Company finalFoundComp = foundComp;
+                        Company finalFoundComp1 = foundComp;
+                        acceptButton.addActionListener(e1 -> {
+                            Object source1 = e1.getSource();
+                            if(source1 instanceof JButton) {
+                                if (requests.getSelectedIndex() >= 0){
+                                    managerPanel.set(new JPanel());
+                                    String selectedUser = requests.getSelectedValue();
+                                    StringTokenizer stSlctUser = new StringTokenizer(selectedUser, " |");
+                                    String jobName = stSlctUser.nextToken();
+                                    String userFirstName = stSlctUser.nextToken();
+                                    String userLastName = stSlctUser.nextToken();
+                                    for(Department d : finalFoundComp.getDepartments()){
+                                        for (Job j : d.getJobs()){
+                                            if(j.getJobName().equals(jobName)){
+                                                Recruiter.Request<Job, Consumer> foundReq = null;
+                                                for(Recruiter.Request<Job, Consumer> re : finalFoundComp.getManager()
+                                                        .requests){
+                                                    if(re.getValue1().getResume().getInformation().getFirstName()
+                                                            .equals(userFirstName) && re.getValue1().getResume()
+                                                            .getInformation().getFirstName().equals(userLastName)){
+                                                        foundReq = re;
+                                                        break;
+                                                    }
+                                                }
+                                                User futureEmpl = (User) foundReq.getValue1();
+                                                d.add(futureEmpl.convert());
+
+                                                finalFoundComp.getManager().requests.remove(foundReq);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    requests.remove(requests.getSelectedIndex());
+                                    revalidate();
+                                    //TODO vezi cum faci asta
+
+                                }
+                            }
+                        });
+                    } else {
+                        managerPanel.get().add(new Label("This manager has no request. Please enter" +
+                                " another" + " name.")).setBackground(new Color(255,0,0));
+                        managerPanel.get().setSize(300,400);
+                        managerPanel.get().setVisible(true);
+                        managerPanel.get().setBackground(new Color(224,224,224));
+                        firstPage.setVisible(false);
+                        add(managerPanel.get());
+                        revalidate();
+                    }
 
                 } else {
                     managerPanel.get().add(new Label("This manager does not exist in any company. Please enter" +
@@ -58,7 +143,8 @@ public class ManagerPage extends JFrame{
                     managerPanel.get().setBackground(new Color(224,224,224));
                     firstPage.setVisible(false);
                     add(managerPanel.get());
-                    revalidate();                }
+                    revalidate();
+                }
             }
         });
 

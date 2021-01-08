@@ -446,8 +446,15 @@ public class Test {
                 manager.setResume(resume);
                 System.out.println("company name for manager " + manager.getResume().getInformation().getFirstName());
                 System.out.println("aJuNgI?");
-                experiences.lastElement().getCompany().setManager(manager);
-                System.out.println("din companie " + experiences.lastElement().getCompany().getManager().getResume().getInformation().getFirstName());
+               // experiences.lastElement().getCompany().setManager(manager);
+                for(Company comp : Application.getInstance().getCompanies()){
+                    if(comp.getName().equals(experiences.lastElement().getCompany().getName())){
+                        comp.setManager(manager);
+                        System.out.println("ajungi pana aici?? " + comp.getName());
+                        break;
+                    }
+                }
+              //  System.out.println("din companie " + experiences.lastElement().getCompany().getManager().getResume().getInformation().getFirstName());
                 //todo repara manager-ul ca nu e retinut bine
             }
 
@@ -712,7 +719,8 @@ public class Test {
 // todo  sterge toate system out urile la final
 
             for(Company c : Application.getInstance().getCompanies()){
-                System.out.println("manager in companie " + c.getManager().getResume().getInformation().getFirstName());
+                if(c.getManager() != null)
+                    System.out.println("manager in companie " + c.getManager().getResume().getInformation().getFirstName());
                 //todo wtf?????????????????????????
             }
 
@@ -727,8 +735,10 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         Test test = new Test("src\\consumers.json");
-        // new AdminPage("Admin Page");
-        // new ProfilePage("Profile Page");
-        new ManagerPage("Manager Page");
+         //new AdminPage("Admin Page");
+         //new ProfilePage("Profile Page");
+         new ManagerPage("Manager Page");
+
+         //todo de facut meniu de selectie
    }
 }

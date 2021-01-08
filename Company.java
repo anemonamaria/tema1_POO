@@ -9,7 +9,7 @@ public class Company implements Subject{
 
     public Company(){
         this.name = "";
-        this.manager = new Manager();
+        this.manager = null;
         this.departments = new ArrayList<>();
         this.recruiters = new ArrayList<>();
         this.observers = new ArrayList<>();
