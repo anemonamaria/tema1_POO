@@ -56,7 +56,7 @@ public class AdminPage extends JFrame {
                 revalidate();
                 auxUsers[0] = 1;
                 JTextField message = new JTextField("List of users");
-                add(message);//.setBounds(30,45,10,10); // todo muta la locatia buna
+                add(message);
                 int numberOfUsers = Application.getUsers().size();
                 String column[] = {"FIRST NAME","LAST NAME"};
                 String data[][] = new String[numberOfUsers][2];
@@ -99,7 +99,7 @@ public class AdminPage extends JFrame {
                 revalidate();
                 auxCompanies[0] = 1;
                 JTextField message = new JTextField("List of companies");
-                add(message);//.setBounds(30,45,10,10); // todo muta la locatia buna
+                add(message);
                 JButton showDeps = new JButton("Show departments");
                 showDeps.setBackground(new Color(255,128,0));
                 showDeps.setForeground(Color.WHITE);
@@ -126,7 +126,7 @@ public class AdminPage extends JFrame {
                 showDeps.addActionListener(e1 -> {
                     Object source1 = e1.getSource();
                     if(source1 instanceof JButton && auxDepartments[0] == 0){
-                        if(jList.getSelectedIndex() >= 0 ){  //todo
+                        if(jList.getSelectedIndex() >= 0 ){
                             int index = jList.getSelectedIndex();
                             tabelPanelDepartments.set(new JPanel());
                             String companyName = (String) jList.getSelectedValue(); // am retinut numele companiei
@@ -145,10 +145,9 @@ public class AdminPage extends JFrame {
                                 JButton showSalary = new JButton("Show salary");
                                 showSalary.setBackground(new Color(255,128,0));
                                 showSalary.setForeground(Color.WHITE);
-                                System.out.println("departamente " + numberOfDepartments + " index " + index) ;
                                 for (Department d : Application.getInstance().getCompany(companyName).getDepartments()){
                                     dataForDepartments[j] = d.getName();
-                                    System.out.println(" dep de adaugat "+dataForDepartments[j]);
+                                   // System.out.println(" dep de adaugat "+dataForDepartments[j]);
                                     j++;
                                 }
 
@@ -232,7 +231,6 @@ public class AdminPage extends JFrame {
                                                 tabelPanelSalary.get().setSize(300, 400);
                                                 tabelPanelSalary.get().setVisible(true);
                                                 tabelPanelSalary.get().setBackground(new Color(204, 255, 204));
-                                                //todo de ce nu aapri?
                                                 tabelPanelDepartments.get().setVisible(false);
 
                                                 add(tabelPanelSalary.get());
@@ -279,7 +277,6 @@ public class AdminPage extends JFrame {
                                                 tabelPanelJobs.get().setSize(300, 400);
                                                 tabelPanelJobs.get().setVisible(true);
                                                 tabelPanelJobs.get().setBackground(new Color(204, 255, 204));
-                                                //todo de ce nu actualizezi lista cu job-uri?
                                                 tabelPanelDepartments.get().setVisible(false);
 
                                                 add(tabelPanelJobs.get());

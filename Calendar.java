@@ -4,7 +4,7 @@ public class Calendar {
     private int month;
     private int day;
 
-    public Calendar(){
+    public Calendar() {
         this.year = this.day = this.month = 0;
     }
 

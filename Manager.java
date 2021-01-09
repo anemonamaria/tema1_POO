@@ -17,37 +17,35 @@ public class Manager extends Employee{
         ArrayList<Recruiter.Request<Job, Consumer>> possibleApplicants = new ArrayList<>();
         for (Recruiter.Request<Job, Consumer> r : requests) {
             Consumer user = r.getValue1();
-            System.out.println("hmmmmmmm");   //TODO DE CE E UN SINGUR REQUEST
             if (job.meetsRequirments((User) user)) {
                 possibleApplicants.add(r);
-                System.out.println("hmmm");   //TODO: REPARA FUNCTIA ASTA
                 /// fac o lista cu toti utilizatorii care intrunesc conditii
             }
             else ((User) user).update(new Notification("You were rejected!"));
             // Observer pattern - utilizatori respinsi
         }
         ArrayList<Recruiter.Request<Job, Consumer>> sortedList = new ArrayList<>();
-        double max = 0;
+
         int copyNumberOfEmployees = job.getNumberOfEmployees();
 
-        while(copyNumberOfEmployees != 0 && !possibleApplicants.contains(null)){
+        while(copyNumberOfEmployees != 0 && !possibleApplicants.isEmpty()){
             Recruiter.Request<Job, Consumer> aux = null;
-            System.out.println("mhhhhh");
+            double max = 0;
             for (Recruiter.Request<Job, Consumer> req : possibleApplicants){
-                System.out.println(req.getScore());
                 if (max <= req.getScore()){
-                    System.out.println("ajungi ????");
                     max = req.getScore();
                     aux = req;
                     // aleg utilizatorul cu cel mai mare scor
                 }
             }
-            if (aux.getValue1() != null) {
-                if (!Application.users.contains(aux.getValue1())) {
-                    sortedList.add(aux);
-                    // il adaug in lista sortata descrescator daca nu este angajat intre timp
-                    copyNumberOfEmployees = copyNumberOfEmployees - 1;
-                    // sterg o pozitie din numarul pozitiilor disponibile
+            if(aux != null){
+                if (aux.getValue1() != null) {
+                    if (!Application.users.contains(aux.getValue1())) {
+                        sortedList.add(aux);
+                        // il adaug in lista sortata descrescator daca nu este angajat intre timp
+                        copyNumberOfEmployees = copyNumberOfEmployees - 1;
+                        // sterg o pozitie din numarul pozitiilor disponibile
+                    }
                 }
             }
             possibleApplicants.remove(aux);
@@ -75,15 +73,10 @@ public class Manager extends Employee{
             for(Company c : Application.companies){
                 c.removeObserver(newUser);
                 // Observer pattern - sterg din lista tuturor companiilor observatorul angajat
-                // E BINE????
             }
         }
-        for (Recruiter.Request<Job, Consumer> req : requests){
-            if (req.getKey().getJobName().equals(job.getJobName())){
-                requests.remove(req);
-                //sterg din colectia de requests request-urile pentru job
-            }
-        }
+        //sterg din colectia de requests request-urile pentru job
+        requests.removeIf(req -> req.getKey().getJobName().equals(job.getJobName()));
         job.setAvailable(false);
         Company company = job.getCompany();
         company.notifyAllObservers(new Notification("Closed job!")); // ???

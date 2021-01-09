@@ -30,7 +30,7 @@ public class Education implements Comparable {
 
     public void setEndDate(Calendar endDate) throws InvalidDatesException{
         // verificam daca data de final corespunde
-        if (endDate == null || endDate.compareTo(this.startDate) > 0){   //todo verifica astea
+        if (endDate == null || endDate.compareTo(this.startDate) > 0){
             this.endDate = endDate;
         }
     }

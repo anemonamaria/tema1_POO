@@ -65,12 +65,12 @@ public class ManagerPage extends JFrame{
                                     .getInformation().getLastName() + " | " + req.getValue2().getResume()
                                     .getInformation().getFirstName() + " " + req.getValue2().getResume()
                                     .getInformation().getLastName() + " | " + req.getScore();
-                            System.out.println("da");
+                            l++;
                         }
 
                         JList<String> requests = new JList<>(requestData);
-                        JScrollPane sPaneReq = new JScrollPane(requests);
-                        managerPanel.get().add(sPaneReq);
+                        AtomicReference<JScrollPane> sPaneReq = new AtomicReference<>(new JScrollPane(requests));
+                        managerPanel.get().add(sPaneReq.get());
                         acceptButton.setBackground(new Color(0,0,204));
                         acceptButton.setForeground(Color.WHITE);
                         declineButton.setForeground(Color.WHITE);
@@ -85,7 +85,6 @@ public class ManagerPage extends JFrame{
                         revalidate();
 
                         Company finalFoundComp = foundComp;
-                        Company finalFoundComp1 = foundComp;
                         acceptButton.addActionListener(e1 -> {
                             Object source1 = e1.getSource();
                             if(source1 instanceof JButton) {
@@ -99,28 +98,68 @@ public class ManagerPage extends JFrame{
                                     for(Department d : finalFoundComp.getDepartments()){
                                         for (Job j : d.getJobs()){
                                             if(j.getJobName().equals(jobName)){
-                                                Recruiter.Request<Job, Consumer> foundReq = null;
                                                 for(Recruiter.Request<Job, Consumer> re : finalFoundComp.getManager()
                                                         .requests){
                                                     if(re.getValue1().getResume().getInformation().getFirstName()
                                                             .equals(userFirstName) && re.getValue1().getResume()
                                                             .getInformation().getFirstName().equals(userLastName)){
-                                                        foundReq = re;
+                                                        User futureEmpl = (User) re.getValue1();
+                                                        d.add(futureEmpl.convert());
+
+                                                        finalFoundComp.getManager().requests.remove(re);
                                                         break;
                                                     }
                                                 }
-                                                User futureEmpl = (User) foundReq.getValue1();
-                                                d.add(futureEmpl.convert());
 
-                                                finalFoundComp.getManager().requests.remove(foundReq);
                                                 break;
                                             }
                                         }
                                     }
                                     requests.remove(requests.getSelectedIndex());
+                                    sPaneReq.set(new JScrollPane(requests));
+                                    managerPanel.get().add(sPaneReq.get());
                                     revalidate();
                                     //TODO vezi cum faci asta
 
+                                }
+                            }
+                        });
+
+                        declineButton.addActionListener(e2 -> {
+                            Object source2 = e2.getSource();
+                            if(source2 instanceof JButton){
+                                if(requests.getSelectedIndex() >= 0){
+                                    managerPanel.set(new JPanel());
+                                    String selectedUser = requests.getSelectedValue();
+                                    StringTokenizer stSlctUser = new StringTokenizer(selectedUser, " |");
+                                    String jobName = stSlctUser.nextToken();
+                                    String userFirstName = stSlctUser.nextToken();
+                                    String userLastName = stSlctUser.nextToken();
+                                    for(Department d : finalFoundComp.getDepartments()){
+                                        for (Job j : d.getJobs()){
+                                            if(j.getJobName().equals(jobName)){
+                                                for(Recruiter.Request<Job, Consumer> re : finalFoundComp.getManager()
+                                                        .requests){
+                                                    if(re.getValue1().getResume().getInformation().getFirstName()
+                                                            .equals(userFirstName) && re.getValue1().getResume()
+                                                            .getInformation().getFirstName().equals(userLastName)){
+                                                        User futureEmpl = (User) re.getValue1();
+                                                        d.add(futureEmpl.convert());
+
+                                                        finalFoundComp.getManager().requests.remove(re);
+                                                        break;
+                                                    }
+                                                }
+
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    requests.remove(requests.getSelectedIndex());
+                                    sPaneReq.set(new JScrollPane(requests));
+                                    managerPanel.get().add(sPaneReq.get());
+                                    revalidate();
+                                    //todo nici asta nu e buna, de reparat sau vezi ce faci
                                 }
                             }
                         });
@@ -148,7 +187,6 @@ public class ManagerPage extends JFrame{
             }
         });
 
-        JList<String> requestInfo = new JList<>();
         revalidate();
         show();
 

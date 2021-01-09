@@ -444,18 +444,12 @@ public class Test {
                         .vectors(educations,experiences)
                         .build();
                 manager.setResume(resume);
-                System.out.println("company name for manager " + manager.getResume().getInformation().getFirstName());
-                System.out.println("aJuNgI?");
-               // experiences.lastElement().getCompany().setManager(manager);
                 for(Company comp : Application.getInstance().getCompanies()){
                     if(comp.getName().equals(experiences.lastElement().getCompany().getName())){
                         comp.setManager(manager);
-                        System.out.println("ajungi pana aici?? " + comp.getName());
                         break;
                     }
                 }
-              //  System.out.println("din companie " + experiences.lastElement().getCompany().getManager().getResume().getInformation().getFirstName());
-                //todo repara manager-ul ca nu e retinut bine
             }
 
             final String test = new String("src\\Acquaintances.txt");
@@ -678,7 +672,6 @@ public class Test {
 
             ArrayList<Job> availableJobs = new ArrayList<>();
             for (User user : application.users){
-
                 ArrayList<String> companiesName = new ArrayList<>();
                 for (Company c : user.getInterestedCompanies()){
                     companiesName.add(c.getName());
@@ -686,59 +679,30 @@ public class Test {
                 availableJobs = application.getJobs(companiesName);
                 for (Job job : availableJobs){
 
-                    //TODO: ce naiba are functia de process???
                     job.apply(user);
-                   // job.getCompany().getManager().process(job);
-                    // is good???
-
-                    //TODO: verifica daca astia aplica la job
-                    //TODO: verifica request-urile daca sunt trimise
-                }
-            }
-            //  da, retine lista de cunostinte a fiecarui user
-//            System.out.println("\n\tlista de cunostinte a userilor");
-//            for(User u : application.users){
-//                System.out.println("user ul " + u.getResume().getInformation().getFirstName());
-//                for(Consumer c : u.getAquaintance()){
-//                    System.out.println("\t\t\t cunostinta: " + c.getResume().getInformation().getFirstName());
-//                }
-//            }
-
-            for(Company c : Application.companies){
-                for(Department d : c.getDepartments()){
-                    for (Employee e : d.getEmployees()){
-                        System.out.println("compania  "+  c.getName() + " cu deprt " + d.getName() + " cu angajatul " + e.getResume().getInformation().getFirstName() + " last name " + e.getResume().getInformation().getLastName());
-
-                    }
+                    // realizam aplicarea unui user la un job
                 }
             }
 
-            for(User u : Application.getUsers()){
-                System.out.println("User-ul cu first name " + u.getResume().getInformation().getFirstName() + " " + u.getResume().getInformation().getLastName());
+
+
+            for(Job j : availableJobs){
+            //    j.getCompany().getManager().process(j);
+                // TODO de/comenteaza asta daca vrei sa verifici process
             }
+
 // todo  sterge toate system out urile la final
-
-            for(Company c : Application.getInstance().getCompanies()){
-                if(c.getManager() != null)
-                    System.out.println("manager in companie " + c.getManager().getResume().getInformation().getFirstName());
-                //todo wtf?????????????????????????
-            }
 
 
             }  catch (IOException | ParseException e){
             e.printStackTrace();
         }
     }
-    //TODO: fisiser pentru aplicarea userilor
 
 
 
     public static void main(String[] args) throws Exception {
         Test test = new Test("src\\consumers.json");
-         //new AdminPage("Admin Page");
-         //new ProfilePage("Profile Page");
-         new ManagerPage("Manager Page");
-
-         //todo de facut meniu de selectie
+        new OpenPage("Open Page");
    }
 }

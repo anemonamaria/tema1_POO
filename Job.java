@@ -92,32 +92,34 @@ public class Job {
 
     // O metodă prin care un utilizator aplică la un job în companie
     public void apply(User user){
-        // AICI INTRA O DATA
-        //TODO:  de ce are problema aici? DC TRIMITE O SINGURA CERERE?
         Recruiter recruiter = this.company.getRecruiter(user);   /// DE MODFICAT FUNCTIA ASTA PT GRAF, TREBUIE MUTATA IN CLASA ASTA
-        int scor = recruiter.evaluate(this, user);
+        if(meetsRequirments(user)) {
+            int scor = recruiter.evaluate(this, user);
 
-        // Observer pattern
-        this.company.addObserver(user);
-        //Un utilizator este adăugat drept observator pentru o companie în momentul în care acesta aplică la
-        //un job din compania respectivă.
+            // Observer pattern
+            this.company.addObserver(user);
+            //Un utilizator este adăugat drept observator pentru o companie în momentul în care acesta aplică la
+            //un job din compania respectivă.
+        }
     }
 
     // O metodă care iterează prin lista de constrângeri s, i verifică dacă sunt îndeplinite pentru aplicantul primit
     //ca parametru
     public boolean meetsRequirments(User user){
         int aux = 1;
-
         if(!this.experience.verifyX(user.getTotalYearsExperience())){
             aux = 0;
         }
         if (!this.academicAverage.verifyX(user.meanGPA())){
-                    aux = 0;
+            aux = 0;
         }
-        if(user.getResume().getEducation().lastElement().getEndDate() != null){
-            // TODO: de luat anul facultatii nu ultimul an din educatie, pe ei ii intereseaza licenta la job
-            if (!this.graduationYear.verifyX(user.getResume().getEducation().lastElement().getEndDate().getYear())) { ///????
-                aux = 0;
+
+        for(Education e : user.getResume().getEducation()) {
+            if(e.getLevel().equals("college")) {
+                if(!this.graduationYear.verifyX(e.getEndDate().getYear())){
+                    aux = 0;
+                }
+                break;
             }
         }
         if(aux == 1) return true;
@@ -147,8 +149,8 @@ public class Job {
         // verificam daca o valoare se incadreaza in constrangerile clasei
         public boolean verifyX(V x){
             boolean cond1 = false, cond2 = false;
-            if (inferior == null ||  this.inferior.compareTo(x) > 0) return cond1 = true;
-            if (inferior == null ||  this.superior.compareTo(x) < 0) return cond2 = true;
+            if (inferior == null ||  this.inferior.compareTo(x) <= 0) cond1 = true;
+            if (superior == null ||  this.superior.compareTo(x) >= 0) cond2 = true;
             return cond1 && cond2;
         }
     }

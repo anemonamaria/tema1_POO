@@ -57,7 +57,7 @@ public abstract class Consumer {
         int contoar = 0;
         ArrayList<Consumer> visited  = new ArrayList<>();
         for(Consumer c : this.aquaintance){
-            System.out.println("esti aici?");
+          //  System.out.println("esti aici?");
             visited.add(c);
             if(c != consumer) {
                 if (!c.getAquaintance().contains(consumer)) {
@@ -104,9 +104,11 @@ public abstract class Consumer {
     public int getTotalYearsExperience(){
         Integer yearsOfExperience = 0;
         if (this.resume.experience.firstElement().getStartDate().getYear() == this.resume.experience.lastElement().getEndDate().getYear()){
-            yearsOfExperience = 1;  //todo repara get year ca da null
+            yearsOfExperience = 1;
         } else {
             yearsOfExperience = this.resume.experience.lastElement().getEndDate().getYear() - this.resume.experience.firstElement().getStartDate().getYear();
+            if(this.resume.experience.firstElement().getEndDate().getMonth() - this.resume.experience.lastElement().getStartDate().getMonth() > 0)
+            yearsOfExperience++;
         }
         return yearsOfExperience;
     }

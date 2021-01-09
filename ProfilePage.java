@@ -39,7 +39,7 @@ public class ProfilePage extends JFrame {
             if(source instanceof  JButton){
                 revalidate();
                 infoPanel.set(new JPanel());
-                System.out.println(firstName.getText() + " " + lastName.getText() + "aaaaaaaaa");
+                ///System.out.println(firstName.getText() + " " + lastName.getText() + "aaaaaaaaa");
                 String firstNameUser = firstName.getText();
                 String lastNameUser = lastName.getText();
                 Consumer.Resume foundResume = null;
@@ -47,7 +47,7 @@ public class ProfilePage extends JFrame {
                     if(u.getResume().getInformation().getFirstName().equals(firstNameUser) &&
                             u.getResume().getInformation().getLastName().equals(lastNameUser)){
                         foundResume = u.getResume();
-                        System.out.println("intri aici?");
+                       // System.out.println("intri aici?");
                         break;
                     }
                 }
@@ -142,6 +142,5 @@ public class ProfilePage extends JFrame {
             }
         });
         show();
-        //todo : o afisare mai frumoasa in pagina poate
     }
 }
