@@ -74,7 +74,7 @@ public class Job {
 
         // Observer pattern
         if (this.available == false){
-            this.company.notifyAllObservers(); ///??
+            this.company.notifyAllObservers();
         }
     }
 
@@ -92,7 +92,7 @@ public class Job {
 
     // O metodă prin care un utilizator aplică la un job în companie
     public void apply(User user){
-        Recruiter recruiter = this.company.getRecruiter(user);   /// DE MODFICAT FUNCTIA ASTA PT GRAF, TREBUIE MUTATA IN CLASA ASTA
+        Recruiter recruiter = this.company.getRecruiter(user);
         if(meetsRequirments(user)) {
             int scor = recruiter.evaluate(this, user);
 

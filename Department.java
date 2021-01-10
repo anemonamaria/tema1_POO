@@ -11,7 +11,7 @@ public abstract class Department {
         this.name = "";
     }
     // Metodă abstractă care va returna bugetul total de salarii, după aplicarea taxelor;
-    public abstract double getTotalSalaryBudget(); //??
+    public abstract double getTotalSalaryBudget();
 
     // Metodă care întoarce toate joburile deschise din departament;
     public ArrayList<Job> getJobs(){
@@ -39,14 +39,13 @@ public abstract class Department {
         this.jobs.add(job);
         for(User u : Company.observers){
             // Observer pattern - job nou
-            /// E BINE????
             u.update(new Notification("New job!"));
         }
     }
 
     // Metodă care întoarce angajat, ii dintr-un departament;
     public ArrayList<Employee> getEmployees(){
-        return employees; ///????
+        return employees;
     }
 
     public void setEmployees(ArrayList<Employee> employees) {
@@ -83,7 +82,7 @@ public abstract class Department {
         return name;
     }
 
-    // Factory pattern ?????? E BINE?????
+    // Factory pattern
     static class DepartmentFactory {
             public static Department Factory(String departmentName){
             if (departmentName.equals("Marketing")){

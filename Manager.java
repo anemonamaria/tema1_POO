@@ -79,7 +79,7 @@ public class Manager extends Employee{
         requests.removeIf(req -> req.getKey().getJobName().equals(job.getJobName()));
         job.setAvailable(false);
         Company company = job.getCompany();
-        company.notifyAllObservers(new Notification("Closed job!")); // ???
+        company.notifyAllObservers(new Notification("Closed job!"));
         // Observer pattern - job inchis
         // inchidem job-ul dupa ce trecem prin toate request-urile
     }

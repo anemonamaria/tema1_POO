@@ -9,7 +9,7 @@ public class User extends Consumer implements Observer{
         interestedCompanies = new ArrayList<>();
     }
 
-    public Employee convert(){ // ???
+    public Employee convert(){
         Employee newEmployee = new Employee();
         newEmployee.setResume(this.getResume());
         newEmployee.setAquaintance(this.getAquaintance());
@@ -17,7 +17,7 @@ public class User extends Consumer implements Observer{
     }
 
     public Double getTotalScore(){
-        Double score = (double)0; ///????
+        Double score = (double)0;
         Integer yearsOfExperience = 0;
         if (this.getResume().getExperience().firstElement().getStartDate().getYear() == this.getResume().getExperience()
                 .lastElement().getEndDate().getYear()){

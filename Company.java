@@ -113,7 +113,6 @@ public class Company implements Subject{
 
     public Department getDepartment(String departmentName){
         for(Department d : departments){
-          //  System.out.println(d.getClass() + " numele companiei " + getName());
             if(d.getName().equals(departmentName)){
                 return d;
             }
@@ -199,13 +198,13 @@ public class Company implements Subject{
     @Override
     public void notifyAllObservers() {
         for(User o : observers){
-            o.update(new Notification("Notification"));   ///????
+            o.update(new Notification("Notification"));
         }
     }
 
     public void notifyAllObservers(Notification notification){
         for(User o : observers){
-            o.update(notification);   ///????
+            o.update(notification);
         }
     }
 }

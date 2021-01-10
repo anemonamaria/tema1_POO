@@ -8,7 +8,6 @@ public class Recruiter extends Employee {
 
     // un recruiter evalueaza un user in functie de rating-ul sau si de scorul total al user-ului
     public int evaluate(Job job, User user) {
-        // specifica metoda in testare
         double evaluation = this.rating * user.getTotalScore();
         this.used();
         Recruiter.Request<Job, Consumer> newRequest = new Recruiter.Request<Job, Consumer>(job, user, this, (double)evaluation);

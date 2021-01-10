@@ -4,7 +4,6 @@ import java.util.*;
 public class Application {
     public static ArrayList<Company> companies;
     public static ArrayList<User> users;
-    //public static ArrayList<Job> jobs;
 
     // Singleton pattern
     private static Application instance;
@@ -20,14 +19,13 @@ public class Application {
         }
         return instance;
     }
+
+    // Determinarea companiilor care au fost înscrise în aplicatie;
     public ArrayList<Company> getCompanies() {
         return companies;
     }
 
-//    public ArrayList<Job> getJobsAll(){
-//        return  jobs;
-//    }
-
+    //  Determinarea unei anumite companii în functie de numele furnizat;
     public Company getCompany(String name) {
         for (Company c : companies){
             if (c.getName().equals(name))
@@ -36,14 +34,17 @@ public class Application {
         return null;
     }
 
+    // Adăugarea unei companii;
     public void add(Company company) {
         companies.add(company);
     }
 
+    // Adăugarea unui utilizator;
     public void add(User user) {
         add(user);
     }
 
+    // Stergerea unei companii – va întoarce false dacă compania nu există;
     public boolean remove(Company company){
         if (companies.contains(company)) {
             companies.remove(companies.indexOf(company));
@@ -52,6 +53,7 @@ public class Application {
         return false;
     }
 
+    // Stergerea unui utilizator – va întoarce false dacă utilizatorul nu există;
     public boolean remove(User user){
         if (users.contains(user)){
             users.remove(users.indexOf(user));
@@ -60,6 +62,7 @@ public class Application {
         return false;
     }
 
+    // Determinarea joburile disponibile de la companiile pe care le preferă utilizatorul.
     public ArrayList<Job> getJobs(List<String> companies) {
         ArrayList<Job> availableJobs = new ArrayList<>();
         for (String c : companies){
@@ -68,17 +71,6 @@ public class Application {
             }
         }
         return availableJobs;
-    }
-
-    public User getUser(String firstName, String lastName) {
-        int index = 0;
-        for (User u : this.users){
-            if (u.getResume().getInformation().getFirstName() == firstName
-                    && u.getResume().getInformation().getLastName() == lastName){
-                index = users.indexOf(u);
-            }
-        }
-        return users.get(index);
     }
 
     public static ArrayList<User> getUsers() {
@@ -94,30 +86,5 @@ public class Application {
         }
         return null;
     }
-
-
-    public Consumer findConsumer(String firstName, String lastName) {
-        Consumer res = findUser(firstName, lastName);
-        if(res != null) return res;
-
-        for(Company c : companies) {
-            for(Department d : c.getDepartments())
-                for (Employee e : d.getEmployees())
-                    {
-                    if(e.getResume().getInformation().getFirstName().equals(firstName)
-                            && e.getResume().getInformation().getLastName().equals(lastName))
-                            return e;
-                    }
-            for(Recruiter r : c.getRecruiters()) {
-                if(r.getResume().getInformation().getFirstName().equals(firstName)
-                         && r.getResume().getInformation().getLastName().equals(lastName))
-                        return r;
-            }
-        }
-
-        return  null;
-    }
-
-
 }
 
