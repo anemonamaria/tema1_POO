@@ -147,7 +147,6 @@ public class AdminPage extends JFrame {
                                 showSalary.setForeground(Color.WHITE);
                                 for (Department d : Application.getInstance().getCompany(companyName).getDepartments()){
                                     dataForDepartments[j] = d.getName();
-                                   // System.out.println(" dep de adaugat "+dataForDepartments[j]);
                                     j++;
                                 }
 

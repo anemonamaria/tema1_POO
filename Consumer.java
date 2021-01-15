@@ -53,11 +53,9 @@ public abstract class Consumer {
     //Determinarea gradului de prietenie cu un alt utilizator – se realizează o parcurgere în lăt, ime în ret,eaua
     //socială a utilizatorului;
     public int getDegreeInFriendship(Consumer consumer){
-        //TODO: e buna?
         int contoar = 0;
         ArrayList<Consumer> visited  = new ArrayList<>();
         for(Consumer c : this.aquaintance){
-          //  System.out.println("esti aici?");
             visited.add(c);
             if(c != consumer) {
                 if (!c.getAquaintance().contains(consumer)) {

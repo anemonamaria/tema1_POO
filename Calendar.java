@@ -1,5 +1,5 @@
 public class Calendar {
-    //clasa pentru reprezentarea unei dati
+    // clasa pentru reprezentarea unei date calendaristice
     private int year;
     private int month;
     private int day;

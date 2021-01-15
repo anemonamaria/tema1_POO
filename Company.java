@@ -42,7 +42,6 @@ public class Company implements Subject{
     public void setDepartments(ArrayList<Department> departments) {
         if (departments == null) return;
         this.departments.addAll(departments);
-        //this.departments = departments;
     }
 
     public void setRecruiters(ArrayList<Recruiter> recruiters) {

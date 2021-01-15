@@ -242,7 +242,6 @@ public class Test {
                         .vectors(educations,experiences)
                         .build();
                 recruiter.setResume(resume);
-                // se adauga recruiterul?
                 experiences.lastElement().getCompany().add(recruiter);
             }
 
@@ -684,22 +683,14 @@ public class Test {
                 }
             }
 
-
-
             for(Job j : availableJobs){
             //    j.getCompany().getManager().process(j);
                 // TODO de/comenteaza asta daca vrei sa verifici process
             }
-
-// todo  sterge toate system out urile la final
-
-
-            }  catch (IOException | ParseException e){
+        }  catch (IOException | ParseException e){
             e.printStackTrace();
         }
     }
-
-
 
     public static void main(String[] args) throws Exception {
         Test test = new Test("src\\consumers.json");

@@ -38,7 +38,6 @@ public class ManagerPage extends JFrame{
             }
             if(source instanceof JButton){
                 revalidate();
-                System.out.println(firstName.getText() + " " + lastName.getText());
                 Company foundComp = null;
                 for(Company c : Application.getInstance().getCompanies()){
                     if(c.getManager() != null){
@@ -105,22 +104,27 @@ public class ManagerPage extends JFrame{
                                                             .getInformation().getFirstName().equals(userLastName)){
                                                         User futureEmpl = (User) re.getValue1();
                                                         d.add(futureEmpl.convert());
-
+                                                        // angajam in departament user-ul
                                                         finalFoundComp.getManager().requests.remove(re);
                                                         break;
                                                     }
                                                 }
-
                                                 break;
                                             }
                                         }
                                     }
-                                    requests.remove(requests.getSelectedIndex());
-                                    sPaneReq.set(new JScrollPane(requests));
+                                    for(int k = 0 ; k < numberOfRequests; k++){
+                                        if( k == requests.getSelectedIndex() || k > requests.getSelectedIndex()){
+                                            requestData[k] = requestData[k+1];
+                                        } else
+                                            requestData[k] = requestData[k];
+                                    }
+                                    requestData[numberOfRequests] = "";
+                                    JList<String> requestsUpdate = new JList<>(requestData);
+                                    managerPanel.get().remove(sPaneReq.get());
+                                    sPaneReq.set(new JScrollPane(requestsUpdate));
                                     managerPanel.get().add(sPaneReq.get());
                                     revalidate();
-                                    //TODO vezi cum faci asta
-
                                 }
                             }
                         });
@@ -143,9 +147,7 @@ public class ManagerPage extends JFrame{
                                                     if(re.getValue1().getResume().getInformation().getFirstName()
                                                             .equals(userFirstName) && re.getValue1().getResume()
                                                             .getInformation().getFirstName().equals(userLastName)){
-                                                        User futureEmpl = (User) re.getValue1();
-                                                        d.add(futureEmpl.convert());
-
+                                                        // stergem din lista managerului request-ul
                                                         finalFoundComp.getManager().requests.remove(re);
                                                         break;
                                                     }
@@ -155,12 +157,20 @@ public class ManagerPage extends JFrame{
                                             }
                                         }
                                     }
-                                    requests.remove(requests.getSelectedIndex());
-                                    sPaneReq.set(new JScrollPane(requests));
+                                    for(int k = 0 ; k < numberOfRequests; k++){
+                                        if( k == requests.getSelectedIndex() || k > requests.getSelectedIndex()){
+                                            requestData[k] = requestData[k+1];
+                                        } else
+                                            requestData[k] = requestData[k];
+                                    }
+                                    requestData[numberOfRequests] = "";
+                                    JList<String> requestsUpdate = new JList<>(requestData);
+                                    managerPanel.get().remove(sPaneReq.get());
+                                    sPaneReq.set(new JScrollPane(requestsUpdate));
                                     managerPanel.get().add(sPaneReq.get());
                                     revalidate();
-                                    //todo nici asta nu e buna, de reparat sau vezi ce faci
                                 }
+                                revalidate();
                             }
                         });
                     } else {
@@ -173,6 +183,7 @@ public class ManagerPage extends JFrame{
                         add(managerPanel.get());
                         revalidate();
                     }
+                    revalidate();
 
                 } else {
                     managerPanel.get().add(new Label("This manager does not exist in any company. Please enter" +
@@ -189,6 +200,5 @@ public class ManagerPage extends JFrame{
 
         revalidate();
         show();
-
     }
 }

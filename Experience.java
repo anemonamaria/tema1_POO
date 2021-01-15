@@ -18,7 +18,7 @@ public class Experience implements Comparable{
 
     public void setEndDate(Calendar endDate) throws InvalidDatesException{
         // verificam daca data de final corespunde
-        if (endDate == null || endDate.compareTo(this.startDate) > 0 ){   /// NEVERIFICATA
+        if (endDate == null || endDate.compareTo(this.startDate) > 0 ){
             this.endDate = endDate;
         } else throw new InvalidDatesException();
     }
@@ -53,7 +53,9 @@ public class Experience implements Comparable{
     }
 
     public Calendar getEndDate() {
-        return endDate;
+        if (endDate != null)
+            return endDate;
+        else return new Calendar(0,0,0);
     }
 
     public Company getCompany() {
@@ -65,7 +67,7 @@ public class Experience implements Comparable{
         if (((Experience)o).endDate.equals(endDate))
             return company.getName().compareTo(((Experience)o).company.getName());
         if (!Experience.this.startDate.equals(java.time.LocalDate.now())){
-            if (((Experience)o).endDate.compareTo(endDate) < 0) //?? verifica
+            if (((Experience)o).endDate.compareTo(endDate) < 0)
                 return  -1;
             else
                 return 1;
